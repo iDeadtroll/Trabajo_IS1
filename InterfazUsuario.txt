@@ -1,0 +1,39 @@
+Es una posible vista de los menús y submenús de la interfaz.
+
+Menú principal:
+
+    1.  Gestión películas
+    2.  Gestión socios
+    3.  Gestión ventas
+    4.  Gestion alquiler
+    5.  Gestion registro
+    6.  Salir
+
+Submenú gestión películas:
+    1.  Añadir película
+    2.  Actualizar datos de película
+    3.  Consultar película
+    4.  Listar películas
+    5.  Salir
+
+Submenú gestión socios:
+    1.  Dar de alta a socio
+    2.  Dar de baja a socio
+    3.  Consultar datos de socio
+    4.  Listar socios
+    5.  Salir
+
+Submenú gestión ventas:
+    1.  Realizar venta
+    2.  Devolver venta
+    3.  Salir
+
+Submenú gestión alquiler:
+    1.  Realizar alquiler
+    2.  Devolver alquiler
+    3.  Salir
+
+Submenú gestión registro:
+    1.  Registro ventas
+    2.  Registro alquiler
+    3.  Salir
