@@ -1,209 +1,173 @@
+package barranquillo;
+
 import java.util.Scanner;
 
 public class Pantalla {
+
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            int opcionPrincipal = 0;
-            int opcionSubMenu = 0;
-            boolean salir = false;
+        menuPrincipal();
+    }
 
-            while (!salir) {
-                System.out.println("\t\tMenú principal:");
-                System.out.println("1. Gestión películas");
-                System.out.println("2. Gestión socios");
-                System.out.println("3. Gestión ventas");
-                System.out.println("4. Gestión alquiler");
-                System.out.println("5. Gestión registro");
-                System.out.println("6. Salir");
+    private static void limpiarPantalla() {
+        System.out.print("\033[2J\033[H");
+    }
 
-                try {
-                    opcionPrincipal = Integer.parseInt(scanner.nextLine());
-                } catch (NumberFormatException e) {
-                    System.out.println("Error: Seleccione una opción válida (1-6)");
-                    continue;
+    private static void imprimirCabezera(String titulo, String... opciones) {
+        System.out.print("\033[1;7m" + titulo + " |");
+        for (String opcion : opciones) {
+            System.out.print(" " + opcion + " ");
+        }
+    }
+
+    private static char seleccionarOpcion() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\033[0m");
+        return sc.nextLine().toLowerCase().trim().charAt(0);
+    }
+
+    private static void menuPrincipal() {
+        boolean salir = false;
+
+        limpiarPantalla();
+        while (!salir) {
+            imprimirCabezera("Menú principal",
+                    "\033[4mP\033[24melículas",
+                    "\033[4mS\033[24mocios",
+                    "\033[4mV\033[24mentas",
+                    "\033[4mA\033[24mlquiler",
+                    "\033[4mD\033[24mevolución",
+                    "\033[4mC\033[24merrar"
+            );
+
+            switch (seleccionarOpcion()) {
+                case 'p' -> {
+                    submenuPeliculas();
                 }
-
-                switch (opcionPrincipal) {
-                    case 1:
-                        opcionSubMenu = 0;
-                        while (opcionSubMenu != 5) {
-                            System.out.println("\t\tGestión películas:");
-                            System.out.println("1. Añadir película");
-                            System.out.println("2. Actualizar datos de película");
-                            System.out.println("3. Consultar película");
-                            System.out.println("4. Listar películas");
-                            System.out.println("5. Salir al menú principal");
-
-                            try {
-                                opcionSubMenu = Integer.parseInt(scanner.nextLine());
-                            } catch (NumberFormatException e) {
-                                System.out.println("Error: Seleccione una opción válida (1-5)");
-                                continue;
-                            }
-
-                            switch (opcionSubMenu) {
-                                case 1:
-                                    System.out.println("Has seleccionado la opción 1 del submenú gestión películas");
-                                    break;
-                                case 2:
-                                    System.out.println("Has seleccionado la opción 2 del submenú gestión películas");
-                                    break;
-                                case 3:
-                                    System.out.println("Has seleccionado la opción 3 del submenú gestión películas");
-                                    break;
-                                case 4:
-                                    System.out.println("Has seleccionado la opción 4 del submenú gestión películas");
-                                    break;
-                                case 5:
-                                    System.out.println("Volviendo al menú principal...");
-                                    break;
-                                default:
-                                    System.out.println("Seleccione una opción válida (1-5)");
-                                    break;
-                            }
-                        }
-                        break;
-                    case 2:
-                        opcionSubMenu = 0;
-                        while (opcionSubMenu != 5) {
-                            System.out.println("\t\tGestión socios:");
-                            System.out.println("1. Dar de alta a socio");
-                            System.out.println("2. Dar de baja a socio");
-                            System.out.println("3. Consultar datos de socio");
-                            System.out.println("4. Listar socios");
-                            System.out.println("5. Salir al menú principal");
-
-                            try {
-                                opcionSubMenu = Integer.parseInt(scanner.nextLine());
-                            } catch (NumberFormatException e) {
-                                System.out.println("Error: Seleccione una opción válida (1-5)");
-                                continue;
-                            }
-
-                            switch (opcionSubMenu) {
-                                case 1:
-                                    System.out.println("Has seleccionado la opción 1 del submenú gestión socios");
-                                    break;
-                                case 2:
-                                    System.out.println("Has seleccionado la opción 2 del submenú gestión socios");
-                                    break;
-                                case 3:
-                                    System.out.println("Has seleccionado la opción 3 del submenú gestión socios");
-                                    break;
-                                case 4:
-                                    System.out.println("Has seleccionado la opción 4 del submenú gestión socios");
-                                    break;
-                                case 5:
-                                    System.out.println("Volviendo al menú principal...");
-                                    break;
-                                default:
-                                    System.out.println("Seleccione una opción válida (1-5)");
-                                    break;
-                            }
-                        }
-                        break;
-                    case 3:
-                        opcionSubMenu = 0;
-                        while (opcionSubMenu != 3) {
-                            System.out.println("\t\tGestión ventas:");
-                            System.out.println("1. Realizar venta");
-                            System.out.println("2. Devolver venta");
-                            System.out.println("3. Salir al menú principal");
-
-                            try {
-                                opcionSubMenu = Integer.parseInt(scanner.nextLine());
-                            } catch (NumberFormatException e) {
-                                System.out.println("Error: Seleccione una opción válida (1-3)");
-                                continue;
-                            }
-
-                            switch (opcionSubMenu) {
-                                case 1:
-                                    System.out.println("Has seleccionado la opción 1 del submenú gestión ventas");
-                                    break;
-                                case 2:
-                                    System.out.println("Has seleccionado la opción 2 del submenú gestión ventas");
-                                    break;
-                                case 3:
-                                    System.out.println("Volviendo al menú principal...");
-                                    break;
-                                default:
-                                    System.out.println("Seleccione una opción válida (1-3)");
-                                    break;
-                            }
-                        }
-                        break;
-                    case 4:
-                        opcionSubMenu = 0;
-                        while (opcionSubMenu != 3) {
-                            System.out.println("\t\tGestión alquiler:");
-                            System.out.println("1. Realizar alquiler");
-                            System.out.println("2. Devolver alquiler");
-                            System.out.println("3. Salir al menú principal");
-
-                            try {
-                                opcionSubMenu = Integer.parseInt(scanner.nextLine());
-                            } catch (NumberFormatException e) {
-                                System.out.println("Error: Seleccione una opción válida (1-3)");
-                                continue;
-                            }
-
-                            switch (opcionSubMenu) {
-                                case 1:
-                                    System.out.println("Has seleccionado la opción 1 del submenú gestión alquiler");
-                                    break;
-                                case 2:
-                                    System.out.println("Has seleccionado la opción 2 del submenú gestión alquiler");
-                                    break;
-                                case 3:
-                                    System.out.println("Volviendo al menú principal...");
-                                    break;
-                                default:
-                                    System.out.println("Seleccione una opción válida (1-3)");
-                                    break;
-                            }
-                        }
-                        break;
-                    case 5:
-                        opcionSubMenu = 0;
-                        while (opcionSubMenu != 3) {
-                            System.out.println("\t\tGestión registro:");
-                            System.out.println("1. Registro ventas");
-                            System.out.println("2. Registro alquiler");
-                            System.out.println("3. Salir al menú principal");
-
-                            try {
-                                opcionSubMenu = Integer.parseInt(scanner.nextLine());
-                            } catch (NumberFormatException e) {
-                                System.out.println("Error: Seleccione una opción válida (1-3)");
-                                continue;
-                            }
-
-                            switch (opcionSubMenu) {
-                                case 1:
-                                    System.out.println("Has seleccionado la opción 1 del submenú gestión registro");
-                                    break;
-                                case 2:
-                                    System.out.println("Has seleccionado la opción 2 del submenú gestión registro");
-                                    break;
-                                case 3:
-                                    System.out.println("Volviendo al menú principal...");
-                                    break;
-                                default:
-                                    System.out.println("Seleccione una opción válida (1-3)");
-                                    break;
-                            }
-                        }
-                        break;
-                    case 6:
-                        salir = true;
-                        System.out.println("Saliendo...");
-                        break;
-                    default:
-                        System.out.println("Seleccione una opción válida (1-6)");
-                        break;
+                case 's' -> {
+                    submenuSocios();
+                }
+                case 'v' -> {
+                    realizarVenta();
+                }
+                case 'a' -> {
+                    realizarAlquiler();
+                }
+                case 'd' -> {
+                    realizarDevolucion();
+                }
+                case 'c' -> {
+                    salir = true;
+                }
+                default -> {
+                    manejarOpcionDesconocida();
                 }
             }
         }
+        limpiarPantalla();
     }
+
+    private static void submenuPeliculas() {
+        boolean volver = false;
+
+        limpiarPantalla();
+        while (!volver) {
+            imprimirCabezera("Gestión de películas",
+                    "\033[4mA\033[24mñadir",
+                    "Ac\033[4mt\033[24mualizar",
+                    "\033[4mC\033[24monsultar",
+                    "\033[4mL\033[24mistar",
+                    "\033[4mV\033[24molver"
+            );
+
+            switch (seleccionarOpcion()) {
+                case 'a' -> {
+                    /* añadir película */
+                    System.out.println("Añadir película...");
+                }
+                case 't' -> {
+                    /* actualizar película */
+                    System.out.println("Actualizar película...");
+                }
+                case 'c' -> {
+                    /* consultar película */
+                    System.out.println("Consultar película...");
+                }
+                case 'l' -> {
+                    /* listar películas */
+                    System.out.println("Listar películas...");
+                }
+                case 'v' -> {
+                    volver = true;
+                }
+                default -> {
+                    manejarOpcionDesconocida();
+                }
+            }
+        }
+        limpiarPantalla();
+    }
+
+    private static void submenuSocios() {
+        boolean volver = false;
+
+        limpiarPantalla();
+        while (!volver) {
+            imprimirCabezera("Gestión de socios",
+                    "\033[4mA\033[24mlta",
+                    "\033[4mB\033[24maja",
+                    "\033[4mC\033[24monsultar",
+                    "\033[4mL\033[24mistar",
+                    "\033[4mV\033[24molver"
+            );
+
+            switch (seleccionarOpcion()) {
+                case 'a' -> {
+                    /* alta socio */
+                    System.out.println("Alta socio...");
+                }
+                case 'b' -> {
+                    /* baja socio */
+                    System.out.println("Baja socio...");
+                }
+                case 'c' -> {
+                    /* baja socio */
+                    System.out.println("Baja socio...");
+                }
+                case 'l' -> {
+                    /* listar socios */
+                    System.out.println("Listar socios...");
+                }
+                case 'v' -> {
+                    volver = true;
+                }
+                default -> {
+                    manejarOpcionDesconocida();
+                }
+            }
+        }
+        limpiarPantalla();
+    }
+
+    private static void realizarVenta() {
+        /**
+         * @todo
+         */
+    }
+
+    private static void realizarAlquiler() {
+        /**
+         * @todo
+         */
+    }
+
+    private static void realizarDevolucion() {
+        /**
+         * @todo
+         */
+    }
+
+    private static void manejarOpcionDesconocida() {
+        System.out.print("\007");
+    }
+
 }
