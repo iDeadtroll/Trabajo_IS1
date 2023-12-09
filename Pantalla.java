@@ -13,16 +13,18 @@ public class Pantalla {
     }
 
     private static void imprimirCabezera(String titulo, String... opciones) {
-        System.out.print("\033[1;7m" + titulo + " |");
+        System.out.print("\033[1;7m " + titulo + " | ");
         for (String opcion : opciones) {
-            System.out.print(" " + opcion + " ");
+            System.out.print(opcion + " ");
         }
+        System.out.print("| ");
     }
 
     private static char seleccionarOpcion() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("\033[0m");
-        return sc.nextLine().toLowerCase().trim().charAt(0);
+        char c = sc.nextLine().toLowerCase().trim().charAt(0);
+        System.out.print("\033[A\033[2K\033[0m");
+        return c;
     }
 
     private static void menuPrincipal() {
@@ -33,7 +35,7 @@ public class Pantalla {
             imprimirCabezera("Menú principal",
                     "\033[4mP\033[24melículas",
                     "\033[4mS\033[24mocios",
-                    "\033[4mV\033[24mentas",
+                    "\033[4mV\033[24menta",
                     "\033[4mA\033[24mlquiler",
                     "\033[4mD\033[24mevolución",
                     "\033[4mC\033[24merrar"
@@ -47,13 +49,16 @@ public class Pantalla {
                     submenuSocios();
                 }
                 case 'v' -> {
-                    realizarVenta();
+                    /* realizar venta */
+                    System.out.println("Realizar venta...\n...\n...");
                 }
                 case 'a' -> {
-                    realizarAlquiler();
+                    /* realizar alquiler */
+                    System.out.println("Realizar alquiler...\n...\n...");
                 }
                 case 'd' -> {
-                    realizarDevolucion();
+                    /* realizar devolucion */
+                    System.out.println("Realizar devolucion...\n...\n...");
                 }
                 case 'c' -> {
                     salir = true;
@@ -82,19 +87,19 @@ public class Pantalla {
             switch (seleccionarOpcion()) {
                 case 'a' -> {
                     /* añadir película */
-                    System.out.println("Añadir película...");
+                    System.out.println("Añadir película...\n...\n...");
                 }
                 case 't' -> {
                     /* actualizar película */
-                    System.out.println("Actualizar película...");
+                    System.out.println("Actualizar película...\n...\n...");
                 }
                 case 'c' -> {
                     /* consultar película */
-                    System.out.println("Consultar película...");
+                    System.out.println("Consultar película...\n...\n...");
                 }
                 case 'l' -> {
                     /* listar películas */
-                    System.out.println("Listar películas...");
+                    System.out.println("Listar películas...\n...\n...");
                 }
                 case 'v' -> {
                     volver = true;
@@ -123,19 +128,19 @@ public class Pantalla {
             switch (seleccionarOpcion()) {
                 case 'a' -> {
                     /* alta socio */
-                    System.out.println("Alta socio...");
+                    System.out.println("Alta socio...\n...\n...");
                 }
                 case 'b' -> {
                     /* baja socio */
-                    System.out.println("Baja socio...");
+                    System.out.println("Baja socio...\n...\n...");
                 }
                 case 'c' -> {
-                    /* consultar socio */
-                    System.out.println("Baja socio...");
+                    /* baja socio */
+                    System.out.println("Baja socio...\n...\n...");
                 }
                 case 'l' -> {
                     /* listar socios */
-                    System.out.println("Listar socios...");
+                    System.out.println("Listar socios...\n...\n...");
                 }
                 case 'v' -> {
                     volver = true;
@@ -146,24 +151,6 @@ public class Pantalla {
             }
         }
         limpiarPantalla();
-    }
-
-    private static void realizarVenta() {
-        /**
-         * @todo
-         */
-    }
-
-    private static void realizarAlquiler() {
-        /**
-         * @todo
-         */
-    }
-
-    private static void realizarDevolucion() {
-        /**
-         * @todo
-         */
     }
 
     private static void manejarOpcionDesconocida() {
