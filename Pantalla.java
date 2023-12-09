@@ -130,7 +130,7 @@ public class Pantalla {
                     System.out.println("Baja socio...");
                 }
                 case 'c' -> {
-                    /* baja socio */
+                    /* consultar socio */
                     System.out.println("Baja socio...");
                 }
                 case 'l' -> {
