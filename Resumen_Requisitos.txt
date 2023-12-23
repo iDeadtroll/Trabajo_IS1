@@ -1,0 +1,30 @@
+Gestión de socios:
+
+    Los socios tienen un identificador (DNI), estado (alta o baja), datos personales (nombre y apellidos), datos de contacto (número de teléfono) y un registro de las películas que tienen alquiladas.
+    Se necesita poder dar de alta y de baja a los socios.
+    Se necesita poder consultar datos de todos los socios (consulta general) y de un socio específico (consulta específica).
+    La consulta general mostrará una tabla con el identificador, estado y número de películas alquiladas de cada socio.
+    La consulta específica mostrará el identificador, estado, datos personales, datos de contacto y las películas alquiladas de un socio específico.
+Gestión de películas:
+
+    Las películas tienen un título (identificador), precio de venta, precio de alquiler, stock disponible, stock no disponible, stock total y un listado de los socios que las tienen alquiladas.
+    Se necesita poder consultar datos de todas las películas (consulta general), así como consultar y actualizar datos de una película específica (consulta y modificación específicas).
+    La consulta general mostrará una tabla con el título, stock disponible, stock no disponible y stock total de cada película.
+    La consulta específica mostrará el título, precio de venta, precio de alquiler, stock disponible, stock no disponible, stock total y los identificadores (DNI) de los socios que tienen una copia de la película alquilada.
+    La actualización de datos de una película permitirá actualizar el stock disponible, precio de venta y precio de alquiler.
+Compra:
+
+    Tanto clientes como socios pueden comprar múltiples películas.
+    Una vez realizada la transacción, se generará un ticket de compra que incluirá las películas vendidas, unidades, total, pago y cambio.
+Alquiler:
+
+    Solo los socios pueden alquilar películas.
+    Cada socio puede alquilar varias películas distintas.
+    En el alquiler se paga una retención que equivale al precio de compra de la película.
+    El ticket de alquiler incluirá el socio, las películas alquiladas, el precio de alquiler de cada película, el precio de la retención, total, pago y cambio.
+Devolución:
+
+    Solo los socios con películas alquiladas pueden devolverlas.
+    Cada socio puede devolver varias películas a la vez.
+    En la devolución, el dependiente devuelve la retención al socio y el socio paga el precio de alquiler de cada película.
+    El ticket de devolución incluirá las películas devueltas, importe de la devolución de la retención de cada película devuelta, total, pago y cambio.
