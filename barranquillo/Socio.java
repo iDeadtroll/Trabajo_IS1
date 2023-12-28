@@ -31,7 +31,7 @@ public class Socio {
         return telefono;
     }
      
-    public Préstamo buscarPréstamo(Película película) {
+    public Prestamo buscarPréstamo(Pelicula película) {
         // Implementar método
         return null; 
     }
