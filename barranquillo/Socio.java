@@ -1,14 +1,23 @@
 package barranquillo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Socio {
     private String dni;
     private boolean estado;
     private String nombre;
     private String apellidos;
     private String telefono;
+    private List<Recibo> recibos;
 
     public Socio(String dni) {
         this.dni = dni;
+        this.estado = true;
+        this.nombre = "";
+        this.apellidos = "";
+        this.telefono = "";
+        this.recibos = new ArrayList<>();
     }
 
     public String obtenerDni() {
@@ -37,7 +46,7 @@ public class Socio {
     }
      
     public void añadirRecibo(Recibo recibo) {
-        // Implementar método
+        this.recibos.add(recibo);
     }
      
     public void asignarBaja() {
@@ -58,7 +67,7 @@ public class Socio {
         apellidos = ns; 
     } 
 
-    public void asignarTeléfono(String n) { 
+    public void asignarTelefono(String n) { 
         telefono = n; 
     }  
 }

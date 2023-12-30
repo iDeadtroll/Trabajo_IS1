@@ -1,5 +1,6 @@
 package barranquillo;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Pantalla {
@@ -156,5 +157,73 @@ public class Pantalla {
     private static void manejarOpcionDesconocida() {
         System.out.print("\007");
     }
+    
 
+    public void confirmacionDeAlta() {
+        System.out.println("Alta realizada.");
+    }
+
+    public void confirmacionDePelicula() {
+        System.out.println("Película añadida.");
+    }
+
+    public void confirmacionDeBaja() {
+        System.out.println("Baja realizada.");
+    }
+
+    public void imprimePelicula(Pelicula pe) {
+    
+    }
+
+    public void imprimePeliculas(List<Pelicula> lp) {
+        for (Pelicula pelicula : lp) {
+            imprimePelicula(pelicula);
+        }
+    }
+
+    public void imprimeRecibo(Recibo r) {
+    
+    }
+
+    public void imprimeSocio(Socio s) {
+    
+    }
+
+    public void imprimeSocios(List<Socio> ls) {
+        for (Socio socio : ls) {
+            imprimeSocio(socio);
+        }
+    }
+
+    public void resumePelicula(Pelicula pe) {
+    
+    }
+
+    public void resumeSocio(Socio s) {
+    
+    }
+
+    public String pedirNombre() {
+        
+        System.out.println("Introduzca el nombre del socio:");
+        Scanner sc = new Scanner(System.in);
+        String nombre = sc.nextLine();
+        return nombre;
+    }
+
+    public String pedirApellidos() {
+        
+        System.out.println("Introduzca los apellidos del socio:");
+        Scanner sc = new Scanner(System.in);
+        String apellidos = sc.nextLine();
+        return apellidos;
+    }
+
+    public String pedirTelefono() {
+        
+        System.out.println("Introduzca el teléfono del socio:");
+        Scanner sc = new Scanner(System.in);
+        String telefono = sc.nextLine();
+        return telefono;
+    }
 }

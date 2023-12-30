@@ -11,16 +11,16 @@ public class Prestamo {
         this.precioRetención = pr;
     }
 
+    public Pelicula obtenerPelicula() {
+        return pelicula;
+    }
+
     public double obtenerPrecioAlquiler() {
         return precioAlquiler;
     }
 
     public double obtenerPrecioRetención() {
         return precioRetención;
-    }
-
-    public Pelicula obtenerPelicula() {
-        return pelicula;
     }
 
     public double obtenerTotal() {
