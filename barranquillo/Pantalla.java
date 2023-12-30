@@ -52,16 +52,16 @@ public class Pantalla {
 
                             switch (opcionSubMenu) {
                                 case 1:
-                                    System.out.println("Has seleccionado la opción 1 del submenú gestión películas");
+                                    System.out.println("----Añadir película----");
                                     break;
                                 case 2:
-                                    System.out.println("Has seleccionado la opción 2 del submenú gestión películas");
+                                    System.out.println("----Actualizar datos de película-----");
                                     break;
                                 case 3:
-                                    System.out.println("Has seleccionado la opción 3 del submenú gestión películas");
+                                    System.out.println("----Consultar película----");
                                     break;
                                 case 4:
-                                    System.out.println("Has seleccionado la opción 4 del submenú gestión películas");
+                                    System.out.println("----Listar películas----");
                                     break;
                                 case 5:
                                     System.out.println("Volviendo al menú principal...");
@@ -93,16 +93,16 @@ public class Pantalla {
 
                             switch (opcionSubMenu) {
                                 case 1:
-                                    System.out.println("Has seleccionado la opción 1 del submenú gestión socios");
+                                    System.out.println("----Dar de alta a socio----");
                                     break;
                                 case 2:
-                                    System.out.println("Has seleccionado la opción 2 del submenú gestión socios");
+                                    System.out.println("----Dar de baja a socio----");
                                     break;
                                 case 3:
-                                    System.out.println("Has seleccionado la opción 3 del submenú gestión socios");
+                                    System.out.println("----Consultar datos de socio----");
                                     break;
                                 case 4:
-                                    System.out.println("Has seleccionado la opción 4 del submenú gestión socios");
+                                    System.out.println("----Listar socios----");
                                     break;
                                 case 5:
                                     System.out.println("Volviendo al menú principal...");
