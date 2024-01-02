@@ -69,6 +69,10 @@ public class Socio {
 
     public void asignarTelefono(String n) { 
         telefono = n; 
-    }  
+    }
+    
+    public String toString() {
+        return "DNI: " + dni + ", Nombre: " + nombre + ", Apellidos: " + apellidos + ", Teléfono: " + telefono;
+    }
 }
 

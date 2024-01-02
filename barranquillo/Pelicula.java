@@ -11,7 +11,8 @@ public class Pelicula {
         this.titulo = t;
         this.precioVenta = pv;
         this.precioAlquiler = pa;
-        // Inicializa otros campos según sea necesario
+        this.stockDisponible = 0;
+        this.stockNoDisponible = 0;
     }
 
     public String obtenerTitulo() {

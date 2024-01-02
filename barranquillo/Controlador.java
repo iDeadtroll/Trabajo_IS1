@@ -7,9 +7,9 @@ public class Controlador {
     private Videoclub videoclub;
     private Pantalla pantalla;
 
-    public Controlador(Videoclub videoclub, Pantalla pantalla) {
+    public Controlador(Videoclub videoclub) {
         this.videoclub = videoclub;
-        this.pantalla = pantalla;
+        this.pantalla = new Pantalla(this);
     }
 
     public void altaSocio(String dni) {
@@ -20,7 +20,7 @@ public class Controlador {
         String nombre = pantalla.pedirNombre();
         String apellidos = pantalla.pedirApellidos();
         String telefono = pantalla.pedirTelefono();
-        introducirDatosSocio(nombre, apellidos,telefono);
+        introducirDatosSocio(s, nombre, apellidos, telefono);
 
         // Obtener la lista de socios del videoclub
         List<Socio> ls = videoclub.obtenerSocios();
@@ -53,24 +53,23 @@ public class Controlador {
     }
 
     public void iniciarPréstamo() {
- 
+
     }
-    
+
     public void iniciarDevolución() {
 
     }
-     
-    public void iniciarVenta(){
+
+    public void iniciarVenta() {
 
     }
-     
-    public void introducirDatosPelicula(){
+
+    public void introducirDatosPelicula() {
 
     }
-     
-    public void introducirDatosSocio(String nombre, String apellidos, String telefono) {
+
+    public void introducirDatosSocio(Socio s, String nombre, String apellidos, String telefono) {
         // Guardar los datos del socio en el objeto
-        Socio s = new Socio("");
         s.asignarNombre(nombre);
         s.asignarApellidos(apellidos);
         s.asignarTelefono(telefono);
@@ -78,25 +77,24 @@ public class Controlador {
         // Imprimir los datos del socio
         pantalla.imprimeSocio(s);
     }
-      
-    public List<Pelicula> listarPeliculas(){
+
+    public List<Pelicula> listarPeliculas() {
 
         return null;
     }
-       
-    public List<Socio> listarSocios(){
+
+    public List<Socio> listarSocios() {
 
         return null;
     }
-    
-    public Pelicula seleccionarPelicula(){
- 
+
+    public Pelicula seleccionarPelicula() {
+
         return null;
     }
-    
-    public Socio seleccionarSocio(){
+
+    public Socio seleccionarSocio() {
 
         return null;
     }
 }
-

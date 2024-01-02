@@ -3,9 +3,15 @@ package barranquillo;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class Pantalla {
-    public static void main(String[] args) {
+    Controlador controlador;
+
+    public Pantalla(Controlador ctrl){
+        this.controlador = ctrl;
+    }
+    
+    public void mostrarInterfaz() {
+    
         try (Scanner scanner = new Scanner(System.in)) {
             int opcionPrincipal = 0;
             int opcionSubMenu = 0;
@@ -94,6 +100,9 @@ public class Pantalla {
                             switch (opcionSubMenu) {
                                 case 1:
                                     System.out.println("----Dar de alta a socio----");
+                                    System.out.println("Introduzca el DNI del nuevo socio:");
+                                    String dni = scanner.nextLine();
+                                    controlador.altaSocio(dni);
                                     break;
                                 case 2:
                                     System.out.println("----Dar de baja a socio----");
@@ -162,7 +171,8 @@ public class Pantalla {
     }
 
     public void imprimeSocio(Socio s) {
-    
+        System.out.println("Datos del nuevo socio:");
+        System.out.println(s.toString());
     }
 
     public void imprimeSocios(List<Socio> ls) {
@@ -203,5 +213,5 @@ public class Pantalla {
         return telefono;
     }
     
-}
 
+}
