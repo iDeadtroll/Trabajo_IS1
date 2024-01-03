@@ -6,17 +6,16 @@ import java.util.Scanner;
 public class Pantalla {
     Controlador controlador;
 
-    public Pantalla(Controlador ctrl){
+    public Pantalla(Controlador ctrl) {
         this.controlador = ctrl;
     }
-    
+
     public void mostrarInterfaz() {
-    
+
         try (Scanner scanner = new Scanner(System.in)) {
             int opcionPrincipal = 0;
             int opcionSubMenu = 0;
             boolean salir = false;
-
 
             while (!salir) {
                 System.out.println("\t\tMenú principal:");
@@ -27,14 +26,12 @@ public class Pantalla {
                 System.out.println("5. Realizar devolucion");
                 System.out.println("6. Salir");
 
-
                 try {
                     opcionPrincipal = Integer.parseInt(scanner.nextLine());
                 } catch (NumberFormatException e) {
                     System.out.println("Error: Seleccione una opción válida (1-6)");
                     continue;
                 }
-
 
                 switch (opcionPrincipal) {
                     case 1:
@@ -47,14 +44,12 @@ public class Pantalla {
                             System.out.println("4. Listar películas");
                             System.out.println("5. Salir al menú principal");
 
-
                             try {
                                 opcionSubMenu = Integer.parseInt(scanner.nextLine());
                             } catch (NumberFormatException e) {
                                 System.out.println("Error: Seleccione una opción válida (1-5)");
                                 continue;
                             }
-
 
                             switch (opcionSubMenu) {
                                 case 1:
@@ -88,7 +83,6 @@ public class Pantalla {
                             System.out.println("4. Listar socios");
                             System.out.println("5. Salir al menú principal");
 
-
                             try {
                                 opcionSubMenu = Integer.parseInt(scanner.nextLine());
                             } catch (NumberFormatException e) {
@@ -96,12 +90,10 @@ public class Pantalla {
                                 continue;
                             }
 
-
                             switch (opcionSubMenu) {
                                 case 1:
                                     System.out.println("----Dar de alta a socio----");
-                                    System.out.println("Introduzca el DNI del nuevo socio:");
-                                    String dni = scanner.nextLine();
+                                    String dni = pedirDni();
                                     controlador.altaSocio(dni);
                                     break;
                                 case 2:
@@ -109,9 +101,13 @@ public class Pantalla {
                                     break;
                                 case 3:
                                     System.out.println("----Consultar datos de socio----");
+                                    List<Socio> ls1 = controlador.listarSocios();
+                                    imprimeSocios(ls1);
                                     break;
                                 case 4:
                                     System.out.println("----Listar socios----");
+                                    List<Socio> ls2 = controlador.listarSocios();
+                                    imprimeSocios(ls2);
                                     break;
                                 case 5:
                                     System.out.println("Volviendo al menú principal...");
@@ -143,7 +139,6 @@ public class Pantalla {
         }
     }
 
-
     public void confirmacionDeAlta() {
         System.out.println("Alta realizada.");
     }
@@ -157,7 +152,7 @@ public class Pantalla {
     }
 
     public void imprimePelicula(Pelicula pe) {
-    
+
     }
 
     public void imprimePeliculas(List<Pelicula> lp) {
@@ -167,7 +162,7 @@ public class Pantalla {
     }
 
     public void imprimeRecibo(Recibo r) {
-    
+
     }
 
     public void imprimeSocio(Socio s) {
@@ -176,21 +171,31 @@ public class Pantalla {
     }
 
     public void imprimeSocios(List<Socio> ls) {
-        for (Socio socio : ls) {
-            imprimeSocio(socio);
+        System.out.println("| DNI | Estado | Número de préstamos en curso |");
+        System.out.println("|-----|--------|-------------------------------|");
+        for (Socio s : ls) {
+            resumeSocio(s);
         }
     }
 
     public void resumePelicula(Pelicula pe) {
-    
+
     }
 
     public void resumeSocio(Socio s) {
-    
+        String estado = s.obtenerEstado() ? "activo" : "inactivo";
+        int numPrestamos = s.obtenerRecibos().size(); // Asumiendo que cada recibo corresponde a un préstamo
+        System.out.println("| " + s.obtenerDni() + " | " + estado + " | " + numPrestamos + " |");
+    }
+
+    public String pedirDni() {
+        System.out.println("Introduzca un DNI:");
+        Scanner sc = new Scanner(System.in);
+        String dni = sc.nextLine();
+        return dni;
     }
 
     public String pedirNombre() {
-        
         System.out.println("Introduzca el nombre del socio:");
         Scanner sc = new Scanner(System.in);
         String nombre = sc.nextLine();
@@ -198,7 +203,6 @@ public class Pantalla {
     }
 
     public String pedirApellidos() {
-        
         System.out.println("Introduzca los apellidos del socio:");
         Scanner sc = new Scanner(System.in);
         String apellidos = sc.nextLine();
@@ -206,12 +210,10 @@ public class Pantalla {
     }
 
     public String pedirTelefono() {
-        
         System.out.println("Introduzca el teléfono del socio:");
         Scanner sc = new Scanner(System.in);
         String telefono = sc.nextLine();
         return telefono;
     }
-    
 
 }

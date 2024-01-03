@@ -84,8 +84,7 @@ public class Controlador {
     }
 
     public List<Socio> listarSocios() {
-
-        return null;
+        return videoclub.obtenerSocios();
     }
 
     public Pelicula seleccionarPelicula() {
@@ -93,8 +92,8 @@ public class Controlador {
         return null;
     }
 
-    public Socio seleccionarSocio() {
-
+    public Socio seleccionarSocio(String dni) {
+        
         return null;
     }
 }

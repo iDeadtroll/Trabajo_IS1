@@ -41,7 +41,7 @@ public class Socio {
     }
      
     public Prestamo buscarPréstamo(Pelicula película) {
-        // Implementar método
+        
         return null; 
     }
      
@@ -51,12 +51,10 @@ public class Socio {
      
     public void asignarBaja() {
         estado = false; 
-        // Implementación adicional si es necesario
     }
      
     public void asignarAlta() { 
         estado = true; 
-        // Implementación adicional si es necesario 
     } 
 
     public void asignarNombre(String n) { 
@@ -70,9 +68,24 @@ public class Socio {
     public void asignarTelefono(String n) { 
         telefono = n; 
     }
+
+    public List<Alquiler> obtenerRecibos() {
+        List<Alquiler> alquileres = new ArrayList<>();
+        for (Recibo recibo : recibos) {
+            if (recibo instanceof Alquiler) {
+                alquileres.add((Alquiler) recibo);
+            }
+        }
+        return alquileres;
+    }
     
-    public String toString() {
-        return "DNI: " + dni + ", Nombre: " + nombre + ", Apellidos: " + apellidos + ", Teléfono: " + telefono;
+    public String toString() { 
+        String estadoSocio = obtenerEstado() ? "activo" : "inactivo";
+        String s = "DNI: " + dni + ", Nombre: " + nombre + ", Apellidos: " + apellidos + ", Teléfono: " + telefono + ", Estado: " + estadoSocio;
+        s += "\nRecibos:\n";
+        for (Recibo recibo : recibos) {
+            s += recibo.toString() + "\n";
+        }
+        return s;
     }
 }
-

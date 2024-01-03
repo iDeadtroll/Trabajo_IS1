@@ -1,17 +1,33 @@
 package barranquillo;
 
- class Alquiler extends Recibo {
-    // Atributos y métodos específicos de Alquiler
+import java.util.List;
+
+class Alquiler extends Recibo {
+    private Socio socio;
+    private List<Prestamo> prestamos;
+
+    public Alquiler(Socio socio, List<Prestamo> prestamos) {
+        this.socio = socio;
+        this.prestamos = prestamos;
+    }
+
     @Override
     public double obtenerTotal() {
-        // Implementación específica para Alquiler
-        return 0;
+        double total = 0;
+        for (Prestamo prestamo : prestamos) {
+            total += prestamo.obtenerTotal();
+        }
+        return total;
     }
 
     @Override
     public String aTexto() {
-        // Implementación específica para Alquiler
-        return null;
+        String s = "Recibo de Alquiler para el socio " + socio.toString() + "\n";
+        for (Prestamo prestamo : prestamos) {
+            s += "Película: " + prestamo.obtenerPelicula().obtenerTitulo() + ", Precio de alquiler: " + prestamo.obtenerPrecioAlquiler() + ", Precio de retención: " + prestamo.obtenerPrecioRetención() + "\n";
+        }
+        s += "Total: " + obtenerTotal();
+        return s;
     }
 }
 
