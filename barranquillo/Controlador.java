@@ -32,40 +32,11 @@ public class Controlador {
         pantalla.confirmacionDeAlta();
     }
 
-    public void añadirLineaDeVenta() {
-
-    }
-
-    public void añadirPelicula() {
-
-    }
-
-    public void bajaSocio() {
-
-    }
-
-    public void finalizarPréstamo() {
-
-    }
-
-    public void iniciarAlquiler() {
-
-    }
-
-    public void iniciarPréstamo() {
-
-    }
-
-    public void iniciarDevolución() {
-
-    }
-
-    public void iniciarVenta() {
-
-    }
-
-    public void introducirDatosPelicula() {
-
+    public void bajaSocio(String dni) {
+        Socio s = videoclub.buscarSocio(dni);
+        if (s != null) {
+            s.asignarBaja();
+        }
     }
 
     public void introducirDatosSocio(Socio s, String nombre, String apellidos, String telefono) {
@@ -78,22 +49,13 @@ public class Controlador {
         pantalla.imprimeSocio(s);
     }
 
-    public List<Pelicula> listarPeliculas() {
-
-        return null;
-    }
-
     public List<Socio> listarSocios() {
         return videoclub.obtenerSocios();
     }
 
-    public Pelicula seleccionarPelicula() {
-
-        return null;
-    }
-
     public Socio seleccionarSocio(String dni) {
-        
-        return null;
+        return videoclub.buscarSocio(dni);
     }
+
+    
 }

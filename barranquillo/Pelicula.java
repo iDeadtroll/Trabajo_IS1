@@ -67,4 +67,3 @@ public class Pelicula {
         stockDisponible = sd;
     }
 }
-

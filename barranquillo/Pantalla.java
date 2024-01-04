@@ -34,45 +34,7 @@ public class Pantalla {
                 }
 
                 switch (opcionPrincipal) {
-                    case 1:
-                        opcionSubMenu = 0;
-                        while (opcionSubMenu != 5) {
-                            System.out.println("\t\tGestión películas:");
-                            System.out.println("1. Añadir película");
-                            System.out.println("2. Actualizar datos de película");
-                            System.out.println("3. Consultar película");
-                            System.out.println("4. Listar películas");
-                            System.out.println("5. Salir al menú principal");
 
-                            try {
-                                opcionSubMenu = Integer.parseInt(scanner.nextLine());
-                            } catch (NumberFormatException e) {
-                                System.out.println("Error: Seleccione una opción válida (1-5)");
-                                continue;
-                            }
-
-                            switch (opcionSubMenu) {
-                                case 1:
-                                    System.out.println("----Añadir película----");
-                                    break;
-                                case 2:
-                                    System.out.println("----Actualizar datos de película-----");
-                                    break;
-                                case 3:
-                                    System.out.println("----Consultar película----");
-                                    break;
-                                case 4:
-                                    System.out.println("----Listar películas----");
-                                    break;
-                                case 5:
-                                    System.out.println("Volviendo al menú principal...");
-                                    break;
-                                default:
-                                    System.out.println("Seleccione una opción válida (1-5)");
-                                    break;
-                            }
-                        }
-                        break;
                     case 2:
                         opcionSubMenu = 0;
                         while (opcionSubMenu != 5) {
@@ -93,16 +55,27 @@ public class Pantalla {
                             switch (opcionSubMenu) {
                                 case 1:
                                     System.out.println("----Dar de alta a socio----");
-                                    String dni = pedirDni();
-                                    controlador.altaSocio(dni);
+                                    String dni1 = pedirDni();
+                                    controlador.altaSocio(dni1);
                                     break;
                                 case 2:
                                     System.out.println("----Dar de baja a socio----");
+                                    String dni = pedirDni();
+                                    controlador.bajaSocio(dni);
+                                    System.out.println("El socio con DNI " + dni + " ha sido dado de baja.");
                                     break;
                                 case 3:
                                     System.out.println("----Consultar datos de socio----");
                                     List<Socio> ls1 = controlador.listarSocios();
                                     imprimeSocios(ls1);
+                                    String dni2 = pedirDni();
+                                    Socio s = controlador.seleccionarSocio(dni2);
+                                    if (s != null) {
+                                        imprimeSocio(s);
+                                    } else {
+                                        System.out.println("No se encontró un socio con el DNI proporcionado.");
+                                    }
+
                                     break;
                                 case 4:
                                     System.out.println("----Listar socios----");
@@ -118,22 +91,7 @@ public class Pantalla {
                             }
                         }
                         break;
-                    case 3:
-                        System.out.println("Realizar Venta");
-                        break;
-                    case 4:
-                        System.out.println("Realizar Alquiler");
-                        break;
-                    case 5:
-                        System.out.println("Realizar Devolucion");
-                        break;
-                    case 6:
-                        salir = true;
-                        System.out.println("Saliendo...");
-                        break;
-                    default:
-                        System.out.println("Seleccione una opción válida (1-6)");
-                        break;
+
                 }
             }
         }
@@ -143,30 +101,12 @@ public class Pantalla {
         System.out.println("Alta realizada.");
     }
 
-    public void confirmacionDePelicula() {
-        System.out.println("Película añadida.");
-    }
-
     public void confirmacionDeBaja() {
         System.out.println("Baja realizada.");
     }
 
-    public void imprimePelicula(Pelicula pe) {
-
-    }
-
-    public void imprimePeliculas(List<Pelicula> lp) {
-        for (Pelicula pelicula : lp) {
-            imprimePelicula(pelicula);
-        }
-    }
-
-    public void imprimeRecibo(Recibo r) {
-
-    }
-
     public void imprimeSocio(Socio s) {
-        System.out.println("Datos del nuevo socio:");
+        System.out.println("Datos del socio:");
         System.out.println(s.toString());
     }
 
@@ -176,10 +116,6 @@ public class Pantalla {
         for (Socio s : ls) {
             resumeSocio(s);
         }
-    }
-
-    public void resumePelicula(Pelicula pe) {
-
     }
 
     public void resumeSocio(Socio s) {

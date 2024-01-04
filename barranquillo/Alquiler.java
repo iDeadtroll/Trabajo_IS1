@@ -3,6 +3,7 @@ package barranquillo;
 import java.util.List;
 
 class Alquiler extends Recibo {
+    
     private Socio socio;
     private List<Prestamo> prestamos;
 

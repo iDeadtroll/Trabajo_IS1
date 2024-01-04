@@ -1,16 +1,35 @@
 package barranquillo;
 
+import java.util.List;
+
 public class Devolucion extends Recibo {
-    // Atributos y métodos específicos de Devolución
+    
+    private List<Prestamo> prestamos;
+    private Socio socio;
+
+    public Devolucion(Socio socio, List<Prestamo> prestamos) {
+        this.socio = socio;
+        this.prestamos = prestamos;
+    }
+
     @Override
     public double obtenerTotal() {
-        // Implementación específica para Devolucion
-        return 0;
+        double total = 0;
+        for (Prestamo prestamo : prestamos) {
+            total += prestamo.obtenerTotal();
+        }
+        return total;
     }
 
     @Override
     public String aTexto() {
-        // Implementación específica para Devolucion
-        return null;
+        String s = "Recibo de Devolución para el socio " + socio.toString() + "\n";
+        for (Prestamo prestamo : prestamos) {
+            s += "Película: " + prestamo.obtenerPelicula().obtenerTitulo() + ", Precio de alquiler: "
+                    + prestamo.obtenerPrecioAlquiler() + ", Precio de retención: " + prestamo.obtenerPrecioRetención()
+                    + "\n";
+        }
+        s += "Total: " + obtenerTotal();
+        return s;
     }
 }
