@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Devolucion extends Recibo {
     
-    private List<Prestamo> prestamos;
     private Socio socio;
-
+    private List<Prestamo> prestamos;
+    
     public Devolucion(Socio socio, List<Prestamo> prestamos) {
         this.socio = socio;
         this.prestamos = prestamos;

@@ -18,7 +18,6 @@ public class LineaDeVenta {
     }
 
     public double obtenerTotal() {
-        // Suponiendo que hay un método en la clase Pelicula que devuelve el precio
-        return pelicula.obtenerPrecioVenta() * unidades; 
+        return pelicula.obtenerPrecioVenta() * unidades;
     }
 }

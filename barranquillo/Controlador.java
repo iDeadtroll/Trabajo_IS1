@@ -28,15 +28,57 @@ public class Controlador {
         // Añadir el nuevo socio a la lista
         ls.add(s);
 
-        // Confirmar alta del socio
-        pantalla.confirmacionDeAlta();
+    }
+
+    public void anadirLineaDeVenta() {
+
+    }
+
+    public void anadirPelicula(String titulo) {
+        Pelicula pe = new Pelicula(titulo);
+
+        double pv = pantalla.pedirPrecioVenta();
+        double pa = pantalla.pedirPrecioAlquiler();
+        int stockDisponible = pantalla.pedirStockDisponible();
+        introducirDatosPelicula(pe, pv, pa, stockDisponible);
+
+        List<Pelicula> lp = videoclub.obtenerPeliculas();
+        lp.add(pe);
     }
 
     public void bajaSocio(String dni) {
-        Socio s = videoclub.buscarSocio(dni);
+        Socio s = seleccionarSocio(dni);
         if (s != null) {
             s.asignarBaja();
         }
+    }
+
+    public void finalizarPrestamo() {
+
+    }
+
+    public void iniciarAlquiler() {
+
+    }
+
+    public void iniciarPrestamo() {
+
+    }
+
+    public void iniciarDevolucion() {
+
+    }
+
+    public void iniciarVenta() {
+
+    }
+
+    public void introducirDatosPelicula(Pelicula pe, double pv, double pa, int stockDisponible) {
+        pe.asignarPrecioVenta(pv);
+        pe.asignarPrecioAlquiler(pa);
+        pe.asignarStockDisponible(stockDisponible);
+
+        pantalla.imprimePelicula(pe);
     }
 
     public void introducirDatosSocio(Socio s, String nombre, String apellidos, String telefono) {
@@ -49,13 +91,25 @@ public class Controlador {
         pantalla.imprimeSocio(s);
     }
 
+    public List<Pelicula> listarPeliculas() {
+        return videoclub.obtenerPeliculas();
+    }
+
+    public List<Recibo> listarRecibos(Socio s) {
+
+        return null;
+    }
+
     public List<Socio> listarSocios() {
         return videoclub.obtenerSocios();
+    }
+
+    public Pelicula seleccionarPelicula(String titulo) {
+        return videoclub.buscarPelicula(titulo);
     }
 
     public Socio seleccionarSocio(String dni) {
         return videoclub.buscarSocio(dni);
     }
 
-    
 }

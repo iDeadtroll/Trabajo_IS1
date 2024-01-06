@@ -7,10 +7,10 @@ public class Pelicula {
     private int stockDisponible;
     private int stockNoDisponible;
 
-    public Pelicula(String t, double pv, double pa) {
+    public Pelicula(String t) {
         this.titulo = t;
-        this.precioVenta = pv;
-        this.precioAlquiler = pa;
+        this.precioVenta = 0;
+        this.precioAlquiler = 0;
         this.stockDisponible = 0;
         this.stockNoDisponible = 0;
     }
@@ -65,5 +65,15 @@ public class Pelicula {
 
     public void asignarStockDisponible(int sd) {
         stockDisponible = sd;
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo: " + obtenerTitulo() + "\n" +
+                "Precio de Venta: " + obtenerPrecioVenta() + "\n" +
+                "Precio de Alquiler: " + obtenerPrecioAlquiler() + "\n" +
+                "Stock Disponible: " + obtenerStockDisponible() + "\n" +
+                "Stock No Disponible: " + obtenerStockNoDisponible() + "\n" +
+                "Stock Total: " + obtenerStockTotal();
     }
 }
