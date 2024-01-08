@@ -38,7 +38,7 @@ public class Pantalla {
                     opcionSubMenu = 0;
 
                     while (opcionSubMenu != 5) {
-                        System.out.println("\t\tPeliculas:");
+                        System.out.println("\t\tGestion Peliculas:");
                         System.out.println("1. Añadir pelicula");
                         System.out.println("2. Actualizar datos de pelicula");
                         System.out.println("3. Consultar datos de pelicula");
@@ -171,6 +171,10 @@ public class Pantalla {
                         }
                     }
                     break;
+                case 3:
+                    System.out.println("3. Realizar venta");
+                    controlador.realizarVenta();
+                    break;
             }
         }
     }
@@ -202,6 +206,7 @@ public class Pantalla {
     }
 
     public void imprimeRecibo(Recibo r) {
+        r.aTexto();
     }
 
     public void imprimeSocio(Socio s) {
@@ -233,6 +238,24 @@ public class Pantalla {
         System.out.println("Introduzca un titulo:");
         String titulo = scanner.nextLine();
         return titulo;
+    }
+
+    public int pedirCantidad() {
+        System.out.println("Unidades del titulo:");
+        int cantidad = scanner.nextInt();
+        return cantidad;
+    }
+
+    public boolean masPeliculas() {
+        System.out.println("Desea añadir más películas a la venta? S/N");
+        String respuesta = scanner.nextLine().toUpperCase();
+        if (respuesta.equals("S")) {
+            return true;
+        }
+        if (respuesta.equals("N")) {
+            return false;
+        }
+        return false;
     }
 
     public double pedirPrecioVenta() {

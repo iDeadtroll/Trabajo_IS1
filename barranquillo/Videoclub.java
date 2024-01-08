@@ -12,6 +12,25 @@ public class Videoclub {
         peliculas = new ArrayList<>();
         socios = new ArrayList<>();
 
+        // Añadir 3 peliculas al inicializar la aplicación
+        Pelicula pe1 = new Pelicula("Resistencia");
+        pe1.asignarPrecioVenta(10);
+        pe1.asignarPrecioAlquiler(5);
+        pe1.asignarStockDisponible(1);
+        peliculas.add(pe1);
+
+        Pelicula pe2 = new Pelicula("Last of Us");
+        pe2.asignarPrecioVenta(8);
+        pe2.asignarPrecioAlquiler(4);
+        pe2.asignarStockDisponible(2);
+        peliculas.add(pe2);
+
+        Pelicula pe3 = new Pelicula("Cars");
+        pe3.asignarPrecioVenta(6);
+        pe3.asignarPrecioAlquiler(3);
+        pe3.asignarStockDisponible(3);
+        peliculas.add(pe3);
+
         // Añadir 3 socios al inicializar la aplicación
         Socio s1 = new Socio("1111");
         s1.asignarNombre("Juan");
@@ -30,24 +49,6 @@ public class Videoclub {
         s3.asignarApellidos("Martínez");
         s3.asignarTelefono("567890123");
         socios.add(s3);
-
-        Pelicula pe1 = new Pelicula("Resistencia");
-        pe1.asignarPrecioVenta(10);
-        pe1.asignarPrecioAlquiler(5);
-        pe1.asignarStockDisponible(1);
-        peliculas.add(pe1);
-
-        Pelicula pe2 = new Pelicula("Last of Us");
-        pe2.asignarPrecioVenta(8);
-        pe2.asignarPrecioAlquiler(4);
-        pe2.asignarStockDisponible(2);
-        peliculas.add(pe2);
-
-        Pelicula pe3 = new Pelicula("Cars");
-        pe3.asignarPrecioVenta(6);
-        pe3.asignarPrecioAlquiler(3);
-        pe3.asignarStockDisponible(3);
-        peliculas.add(pe3);
 
     }
 

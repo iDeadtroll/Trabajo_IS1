@@ -12,6 +12,14 @@ public class Venta extends Recibo {
         this.lineasDeVenta = lineasDeVenta;
     }
 
+    public List<LineaDeVenta> obtenerLineasDeVenta() {
+        return lineasDeVenta;
+    }
+
+    public Socio obtenerSocio() {
+        return socio;
+    }
+
     @Override
     public double obtenerTotal() {
         double total = 0;
