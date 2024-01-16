@@ -125,31 +125,21 @@ public class Pantalla {
                         switch (opcionSubMenu) {
                             case 1:
                                 System.out.println("----Dar de alta a socio----");
-                                String dni1 = pedirDni();
-                                controlador.altaSocio(dni1);
+                                controlador.altaSocio(pedirDni());
                                 confirmacionDeAlta();
                                 break;
                             case 2:
                                 System.out.println("----Dar de baja a socio----");
-                                List<Socio> ls1 = controlador.listarSocios();
-                                imprimeSocios(ls1);
-                                String dni2 = pedirDni();
-                                Socio s1 = controlador.seleccionarSocio(dni2);
-
-                                if (s1 != null) {
-                                    controlador.bajaSocio(dni2);
-                                    imprimeSocio(s1);
-                                } else {
-                                    System.out.println("No se encontró un socio con el DNI proporcionado.");
-                                }
+                                imprimeSocios(controlador.listarSocios());
+                                Socio s1 = controlador.seleccionarSocio(pedirDni());
+                                controlador.bajaSocio(s1.obtenerDni());
+                                imprimeSocio(s1);
                                 confirmacionDeBaja();
                                 break;
                             case 3:
                                 System.out.println("----Consultar datos de socio----");
-                                List<Socio> ls2 = controlador.listarSocios();
-                                imprimeSocios(ls2);
-                                String dni3 = pedirDni();
-                                Socio s2 = controlador.seleccionarSocio(dni3);
+                                imprimeSocios(controlador.listarSocios());
+                                Socio s2 = controlador.seleccionarSocio(pedirDni());
 
                                 if (s2 != null) {
                                     imprimeSocio(s2);
@@ -159,8 +149,7 @@ public class Pantalla {
                                 break;
                             case 4:
                                 System.out.println("----Listar socios----");
-                                List<Socio> ls3 = controlador.listarSocios();
-                                imprimeSocios(ls3);
+                                imprimeSocios(controlador.listarSocios());
                                 break;
                             case 5:
                                 System.out.println("Volviendo al menú principal...");
@@ -173,7 +162,9 @@ public class Pantalla {
                     break;
                 case 3:
                     System.out.println("3. Realizar venta");
-                    controlador.realizarVenta();
+                    imprimeSocios(controlador.listarSocios());
+                    controlador.iniciarVenta(pedirDni());
+                    controlador.finalizarVenta();
                     break;
 
                 case 4:
@@ -210,7 +201,7 @@ public class Pantalla {
     }
 
     public void imprimeRecibo(Recibo r) {
-        r.aTexto();
+        System.out.println(r.aTexto());
     }
 
     public void imprimeSocio(Socio s) {

@@ -24,6 +24,6 @@ public class Prestamo {
     }
 
     public double obtenerTotal() {
-        return precioAlquiler + precioRetención; 
+        return precioAlquiler + precioRetención;
     }
 }

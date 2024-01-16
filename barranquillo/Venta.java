@@ -31,18 +31,15 @@ public class Venta extends Recibo {
 
     @Override
     public String aTexto() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Venta para el socio ").append(socio.obtenerDni()).append("\n");
-
+        String s = "Venta para el socio " + socio.obtenerDni() + "\n";
         for (LineaDeVenta lineaDeVenta : lineasDeVenta) {
-            sb.append("Película: ").append(lineaDeVenta.obtenerPelicula().obtenerTitulo())
-                    .append(", Unidades: ").append(lineaDeVenta.obtenerUnidades())
-                    .append(", Precio de venta: ").append(lineaDeVenta.obtenerPelicula().obtenerPrecioVenta())
-                    .append(", Total: ").append(lineaDeVenta.obtenerTotal())
-                    .append("\n");
+            s += "Película: " + lineaDeVenta.obtenerPelicula().obtenerTitulo()
+                    + ", Unidades: " + lineaDeVenta.obtenerUnidades()
+                    + ", Precio de venta: " + lineaDeVenta.obtenerPelicula().obtenerPrecioVenta()
+                    + ", Total: " + lineaDeVenta.obtenerTotal()
+                    + "\n";
         }
-
-        sb.append("Total de la venta: ").append(obtenerTotal());
-        return sb.toString();
+        s += "Total de la venta: " + obtenerTotal();
+        return s;
     }
 }

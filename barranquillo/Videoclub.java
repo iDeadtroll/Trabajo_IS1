@@ -52,23 +52,14 @@ public class Videoclub {
         socios.add(s3);
 
         generarRecibosIniciales();
-
     }
 
     private void generarRecibosIniciales() {
         for (Socio socio : socios) {
-            // Selecciona la primera película disponible
             Pelicula pelicula = obtenerPrimeraPeliculaDisponible();
-
-            // Si hay una película disponible, realiza la transacción
             if (pelicula != null) {
-                // Genera un recibo de venta con una unidad de la película seleccionada
                 Venta reciboVenta = new Venta(socio, Collections.singletonList(new LineaDeVenta(pelicula, 1)));
-
-                // Añade el recibo al historial de recibos del socio
                 socio.añadirRecibo(reciboVenta);
-
-                // Actualiza el stock de la película
                 pelicula.decrementarStockDisponible(1);
                 pelicula.incrementarStockNoDisponible(1);
             }
@@ -85,7 +76,6 @@ public class Videoclub {
     }
 
     public Pelicula buscarPelicula(String t) {
-        // Método para buscar una película por su título
         for (Pelicula pelicula : obtenerPeliculas()) {
             if (pelicula.obtenerTitulo().equals(t)) {
                 return pelicula;
@@ -95,7 +85,6 @@ public class Videoclub {
     }
 
     public Socio buscarSocio(String dni) {
-        // Método para buscar un socio por su DNI
         for (Socio socio : obtenerSocios()) {
             if (socio.obtenerDni().equals(dni)) {
                 return socio;

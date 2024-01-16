@@ -64,39 +64,23 @@ public class Controlador {
     public void iniciarDevolucion() {
     }
 
-    public void realizarVenta() {
-        pantalla.imprimeSocios(videoclub.obtenerSocios());
-        String dni = pantalla.pedirDni();
-        iniciarVenta(dni);
-
+    public void iniciarVenta(String dni) {
+        Socio s = videoclub.buscarSocio(dni);
+        ventaActual = new Venta(s, new ArrayList<>());
         boolean masPeliculas = true;
         while (masPeliculas) {
             pantalla.imprimePeliculas(videoclub.obtenerPeliculas());
             String titulo = pantalla.pedirTitulo();
             int cantidad = pantalla.pedirCantidad();
             anadirLineaDeVenta(titulo, cantidad);
-
-            // Actualiza la variable masPeliculas con el valor retornado por el método
             masPeliculas = pantalla.masPeliculas();
-
-            if (!masPeliculas) {
-                break;
-            }
         }
-
-        // Finaliza la venta después de salir del bucle
-        finalizarVenta();
-    }
-
-    public void iniciarVenta(String dni) {
-        Socio s = videoclub.buscarSocio(dni);
-        ventaActual = new Venta(s, new ArrayList<>());
+        Recibo recibo = ventaActual;
+        ventaActual.obtenerSocio().añadirRecibo(recibo);
     }
 
     public void finalizarVenta() {
-        Recibo recibo = ventaActual;
-        ventaActual.obtenerSocio().añadirRecibo(recibo);
-        pantalla.imprimeRecibo(recibo);
+        pantalla.imprimeRecibo(ventaActual);
         ventaActual = null;
     }
 

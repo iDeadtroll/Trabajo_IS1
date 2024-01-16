@@ -3,7 +3,7 @@ package barranquillo;
 import java.util.List;
 
 class Alquiler extends Recibo {
-    
+
     private Socio socio;
     private List<Prestamo> prestamos;
 
@@ -23,12 +23,13 @@ class Alquiler extends Recibo {
 
     @Override
     public String aTexto() {
-        String s = "Recibo de Alquiler para el socio " + socio.toString() + "\n";
+        String s = "Recibo de Alquiler para el socio " + socio.obtenerDni() + "\n";
         for (Prestamo prestamo : prestamos) {
-            s += "Película: " + prestamo.obtenerPelicula().obtenerTitulo() + ", Precio de alquiler: " + prestamo.obtenerPrecioAlquiler() + ", Precio de retención: " + prestamo.obtenerPrecioRetención() + "\n";
+            s += "Película: " + prestamo.obtenerPelicula().obtenerTitulo() + ", Precio de alquiler: "
+                    + prestamo.obtenerPrecioAlquiler() + ", Precio de retención: " + prestamo.obtenerPrecioRetención()
+                    + "\n";
         }
         s += "Total: " + obtenerTotal();
         return s;
     }
 }
-
