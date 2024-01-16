@@ -26,10 +26,15 @@ public class Controlador {
 
     public void anadirLineaDeVenta(String titulo, int unidades) {
         Pelicula pelicula = videoclub.buscarPelicula(titulo);
-        LineaDeVenta lineaDeVenta = new LineaDeVenta(pelicula, unidades);
-        ventaActual.obtenerLineasDeVenta().add(lineaDeVenta);
-        pelicula.decrementarStockDisponible(unidades);
-        pelicula.incrementarStockNoDisponible(unidades);
+
+        if (pelicula != null) {
+            LineaDeVenta lineaDeVenta = new LineaDeVenta(pelicula, unidades);
+            ventaActual.obtenerLineasDeVenta().add(lineaDeVenta);
+            pelicula.decrementarStockDisponible(unidades);
+            pelicula.incrementarStockNoDisponible(unidades);
+        } else {
+            System.out.println("Pelicula no encontrada.");
+        }
     }
 
     public void anadirPelicula(String titulo) {
@@ -44,9 +49,7 @@ public class Controlador {
 
     public void bajaSocio(String dni) {
         Socio s = seleccionarSocio(dni);
-        if (s != null) {
-            s.asignarBaja();
-        }
+        s.asignarBaja();
     }
 
     public void finalizarPrestamo() {
@@ -65,16 +68,24 @@ public class Controlador {
         pantalla.imprimeSocios(videoclub.obtenerSocios());
         String dni = pantalla.pedirDni();
         iniciarVenta(dni);
-        boolean masPeliculas = pantalla.masPeliculas();
+
+        boolean masPeliculas = true;
         while (masPeliculas) {
             pantalla.imprimePeliculas(videoclub.obtenerPeliculas());
             String titulo = pantalla.pedirTitulo();
             int cantidad = pantalla.pedirCantidad();
             anadirLineaDeVenta(titulo, cantidad);
+
+            // Actualiza la variable masPeliculas con el valor retornado por el método
+            masPeliculas = pantalla.masPeliculas();
+
             if (!masPeliculas) {
-                finalizarVenta();
+                break;
             }
         }
+
+        // Finaliza la venta después de salir del bucle
+        finalizarVenta();
     }
 
     public void iniciarVenta(String dni) {

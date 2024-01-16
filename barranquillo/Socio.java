@@ -39,34 +39,34 @@ public class Socio {
     public String obtenerTelefono() {
         return telefono;
     }
-     
+
     public Prestamo buscarPréstamo(Pelicula película) {
-        
-        return null; 
+
+        return null;
     }
-     
+
     public void añadirRecibo(Recibo recibo) {
         this.recibos.add(recibo);
     }
-     
+
     public void asignarBaja() {
-        estado = false; 
+        estado = false;
     }
-     
-    public void asignarAlta() { 
-        estado = true; 
-    } 
 
-    public void asignarNombre(String n) { 
-        nombre = n; 
-    } 
+    public void asignarAlta() {
+        estado = true;
+    }
 
-    public void asignarApellidos(String ns) { 
-        apellidos = ns; 
-    } 
+    public void asignarNombre(String n) {
+        nombre = n;
+    }
 
-    public void asignarTelefono(String n) { 
-        telefono = n; 
+    public void asignarApellidos(String ns) {
+        apellidos = ns;
+    }
+
+    public void asignarTelefono(String n) {
+        telefono = n;
     }
 
     public List<Alquiler> obtenerRecibos() {
@@ -78,13 +78,14 @@ public class Socio {
         }
         return alquileres;
     }
-    
-    public String toString() { 
+
+    public String toString() {
         String estadoSocio = obtenerEstado() ? "activo" : "inactivo";
-        String s = "DNI: " + dni + ", Nombre: " + nombre + ", Apellidos: " + apellidos + ", Teléfono: " + telefono + ", Estado: " + estadoSocio;
+        String s = "DNI: " + dni + ", Nombre: " + nombre + ", Apellidos: " + apellidos + ", Teléfono: " + telefono
+                + ", Estado: " + estadoSocio;
         s += "\nRecibos:\n";
         for (Recibo recibo : recibos) {
-            s += recibo.toString() + "\n";
+            s += recibo.aTexto() + "\n";
         }
         return s;
     }

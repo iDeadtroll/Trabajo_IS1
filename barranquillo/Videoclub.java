@@ -1,6 +1,7 @@
 package barranquillo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Videoclub {
@@ -50,6 +51,37 @@ public class Videoclub {
         s3.asignarTelefono("567890123");
         socios.add(s3);
 
+        generarRecibosIniciales();
+
+    }
+
+    private void generarRecibosIniciales() {
+        for (Socio socio : socios) {
+            // Selecciona la primera película disponible
+            Pelicula pelicula = obtenerPrimeraPeliculaDisponible();
+
+            // Si hay una película disponible, realiza la transacción
+            if (pelicula != null) {
+                // Genera un recibo de venta con una unidad de la película seleccionada
+                Venta reciboVenta = new Venta(socio, Collections.singletonList(new LineaDeVenta(pelicula, 1)));
+
+                // Añade el recibo al historial de recibos del socio
+                socio.añadirRecibo(reciboVenta);
+
+                // Actualiza el stock de la película
+                pelicula.decrementarStockDisponible(1);
+                pelicula.incrementarStockNoDisponible(1);
+            }
+        }
+    }
+
+    private Pelicula obtenerPrimeraPeliculaDisponible() {
+        for (Pelicula pelicula : peliculas) {
+            if (pelicula.obtenerStockDisponible() > 0) {
+                return pelicula;
+            }
+        }
+        return null;
     }
 
     public Pelicula buscarPelicula(String t) {

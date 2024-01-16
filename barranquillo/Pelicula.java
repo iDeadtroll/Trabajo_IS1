@@ -36,7 +36,7 @@ public class Pelicula {
     }
 
     public int obtenerStockTotal() {
-        return stockDisponible + stockNoDisponible;
+        return obtenerStockDisponible() + obtenerStockNoDisponible();
     }
 
     public void incrementarStockDisponible(int inc) {

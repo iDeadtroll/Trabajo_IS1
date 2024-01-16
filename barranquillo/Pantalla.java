@@ -60,7 +60,7 @@ public class Pantalla {
                                 confirmacionDePelicula();
                                 break;
                             case 2:
-                                System.out.println("----Actualizar datos de pelicula----");
+                                System.out.println("----Actualizar datos de película----");
                                 List<Pelicula> lp1 = controlador.listarPeliculas();
                                 imprimePeliculas(lp1);
                                 String titulo2 = pedirTitulo();
@@ -72,13 +72,13 @@ public class Pantalla {
                                     double pa = pedirPrecioAlquiler();
                                     int stockDisponible = pedirStockDisponible();
                                     controlador.introducirDatosPelicula(pe1, pv, pa, stockDisponible);
+                                    scanner.nextLine();
                                 } else {
-                                    System.out.println("No se encontró una pelicula con el TITULO proporcionado.");
+                                    System.out.println("No se encontró una película con el TÍTULO proporcionado.");
                                 }
-
                                 break;
                             case 3:
-                                System.out.println("----Consultar datos de pelicula----");
+                                System.out.println("----Consultar datos de película----");
                                 List<Pelicula> lp2 = controlador.listarPeliculas();
                                 imprimePeliculas(lp2);
                                 String titulo3 = pedirTitulo();
@@ -87,7 +87,7 @@ public class Pantalla {
                                 if (pe2 != null) {
                                     imprimePelicula(pe2);
                                 } else {
-                                    System.out.println("No se encontró una pelicula con el TITULO proporcionado.");
+                                    System.out.println("No se encontró una película con el TITULO proporcionado.");
                                 }
                                 break;
                             case 4:
@@ -175,6 +175,10 @@ public class Pantalla {
                     System.out.println("3. Realizar venta");
                     controlador.realizarVenta();
                     break;
+
+                case 4:
+                    System.out.println("4. Realizar alquiler");
+                    break;
             }
         }
     }
@@ -243,6 +247,7 @@ public class Pantalla {
     public int pedirCantidad() {
         System.out.println("Unidades del titulo:");
         int cantidad = scanner.nextInt();
+        scanner.nextLine();
         return cantidad;
     }
 
