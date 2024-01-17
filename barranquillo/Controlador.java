@@ -7,6 +7,8 @@ public class Controlador {
     private Videoclub videoclub;
     private Pantalla pantalla;
     private Venta ventaActual;
+    private Alquiler alquilerActual;
+    private Devolucion devolucionActual;
 
     public Controlador(Videoclub videoclub) {
         this.videoclub = videoclub;
@@ -52,20 +54,53 @@ public class Controlador {
         s.asignarBaja();
     }
 
-    public void finalizarPrestamo() {
+    public void iniciarDevolucion(String dni) {
+        Socio s = seleccionarSocio(dni);
+        devolucionActual = new Devolucion(s, new ArrayList<>());
+        boolean masPeliculas = true;
+        while (masPeliculas) {
+            pantalla.imprimePeliculas(videoclub.obtenerPeliculas());
+            String titulo = pantalla.pedirTitulo();
+            finalizarPrestamo(titulo);
+            masPeliculas = pantalla.masPeliculas();
+        }
     }
 
-    public void iniciarAlquiler() {
+    public void finalizarPrestamo(String titulo) {
+
     }
 
-    public void iniciarPrestamo() {
+    public void iniciarAlquiler(String dni) {
+        Socio s = seleccionarSocio(dni);
+        alquilerActual = new Alquiler(s, new ArrayList<>());
+        boolean masPeliculas = true;
+        while (masPeliculas) {
+            pantalla.imprimePeliculas(videoclub.obtenerPeliculas());
+            String titulo = pantalla.pedirTitulo();
+            iniciarPrestamo(titulo);
+            masPeliculas = pantalla.masPeliculas();
+        }
+        Recibo recibo = alquilerActual;
+        alquilerActual.obtenerSocio().añadirRecibo(recibo);
+        pantalla.imprimeRecibo(alquilerActual);
+        ventaActual = null;
     }
 
-    public void iniciarDevolucion() {
+    public void iniciarPrestamo(String titulo) {
+        Pelicula pe = seleccionarPelicula(titulo);
+        double pa = pe.obtenerPrecioAlquiler();
+        double pv = pe.obtenerPrecioVenta();
+        double precioRetención = pv - pa;
+        Prestamo prestamo = new Prestamo(pe, pa, precioRetención);
+        alquilerActual.obtenerPrestamos().add(prestamo);
+        int unidades = 1;
+        pe.decrementarStockDisponible(unidades);
+        pe.incrementarStockNoDisponible(unidades);
+
     }
 
     public void iniciarVenta(String dni) {
-        Socio s = videoclub.buscarSocio(dni);
+        Socio s = seleccionarSocio(dni);
         ventaActual = new Venta(s, new ArrayList<>());
         boolean masPeliculas = true;
         while (masPeliculas) {
@@ -117,4 +152,10 @@ public class Controlador {
     public Socio seleccionarSocio(String dni) {
         return videoclub.buscarSocio(dni);
     }
+
+    public List<Recibo> listarPrestamos(Socio s){
+        List<Recibo> prestamos = new ArrayList<>();
+        
+        return null;
+    } 
 }

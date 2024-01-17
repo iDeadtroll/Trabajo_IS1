@@ -55,16 +55,13 @@ public class Pantalla {
                         switch (opcionSubMenu) {
                             case 1:
                                 System.out.println("----Añadir pelicula----");
-                                String titulo1 = pedirTitulo();
-                                controlador.anadirPelicula(titulo1);
+                                controlador.anadirPelicula(pedirTitulo());
                                 confirmacionDePelicula();
                                 break;
                             case 2:
                                 System.out.println("----Actualizar datos de película----");
-                                List<Pelicula> lp1 = controlador.listarPeliculas();
-                                imprimePeliculas(lp1);
-                                String titulo2 = pedirTitulo();
-                                Pelicula pe1 = controlador.seleccionarPelicula(titulo2);
+                                imprimePeliculas(controlador.listarPeliculas());
+                                Pelicula pe1 = controlador.seleccionarPelicula(pedirTitulo());
 
                                 if (pe1 != null) {
                                     imprimePelicula(pe1);
@@ -79,10 +76,8 @@ public class Pantalla {
                                 break;
                             case 3:
                                 System.out.println("----Consultar datos de película----");
-                                List<Pelicula> lp2 = controlador.listarPeliculas();
-                                imprimePeliculas(lp2);
-                                String titulo3 = pedirTitulo();
-                                Pelicula pe2 = controlador.seleccionarPelicula(titulo3);
+                                imprimePeliculas(controlador.listarPeliculas());
+                                Pelicula pe2 = controlador.seleccionarPelicula(pedirTitulo());
 
                                 if (pe2 != null) {
                                     imprimePelicula(pe2);
@@ -92,8 +87,7 @@ public class Pantalla {
                                 break;
                             case 4:
                                 System.out.println("----Listar peliculas----");
-                                List<Pelicula> lp3 = controlador.listarPeliculas();
-                                imprimePeliculas(lp3);
+                                imprimePeliculas(controlador.listarPeliculas());
                                 break;
                             case 5:
                                 System.out.println("Volviendo al menú principal...");
@@ -169,6 +163,14 @@ public class Pantalla {
 
                 case 4:
                     System.out.println("4. Realizar alquiler");
+                    imprimeSocios(controlador.listarSocios());
+                    controlador.iniciarAlquiler(pedirDni());
+                    break;
+
+                case 5:
+                    System.out.println("5. Realizar devolucion");
+                    imprimeSocios(controlador.listarSocios());
+                    controlador.iniciarDevolucion(pedirDni());
                     break;
             }
         }
@@ -225,7 +227,7 @@ public class Pantalla {
 
     public void resumeSocio(Socio s) {
         String estado = s.obtenerEstado() ? "activo" : "inactivo";
-        int numPrestamos = s.obtenerRecibos().size();
+        int numPrestamos = s.obtenerRecibosAlquiler().size();
         System.out.println("| " + s.obtenerDni() + " | " + estado + " | " + numPrestamos + " |");
     }
 

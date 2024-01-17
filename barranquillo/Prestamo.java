@@ -5,8 +5,8 @@ public class Prestamo {
     private double precioRetención;
     private Pelicula pelicula;
 
-    public Prestamo(Pelicula pe, double pa, double pr) {
-        this.pelicula = pe;
+    public Prestamo(Pelicula titulo, double pa, double pr) {
+        this.pelicula = titulo;
         this.precioAlquiler = pa;
         this.precioRetención = pr;
     }

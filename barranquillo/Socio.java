@@ -69,7 +69,7 @@ public class Socio {
         telefono = n;
     }
 
-    public List<Alquiler> obtenerRecibos() {
+    public List<Alquiler> obtenerRecibosAlquiler() {
         List<Alquiler> alquileres = new ArrayList<>();
         for (Recibo recibo : recibos) {
             if (recibo instanceof Alquiler) {
@@ -78,6 +78,17 @@ public class Socio {
         }
         return alquileres;
     }
+
+    public List<Devolucion> obtenerRecibosDevolucion() {
+        List<Devolucion> devoluciones = new ArrayList<>();
+        for (Recibo recibo : recibos) {
+            if (recibo instanceof Devolucion) {
+                devoluciones.add((Devolucion) recibo);
+            }
+        }
+        return devoluciones;
+    }
+
 
     public String toString() {
         String estadoSocio = obtenerEstado() ? "activo" : "inactivo";

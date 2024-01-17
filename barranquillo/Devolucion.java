@@ -12,6 +12,14 @@ public class Devolucion extends Recibo {
         this.prestamos = prestamos;
     }
 
+    public List<Prestamo> obtenerPrestamos(){
+        return prestamos;
+    }
+
+    public Socio obtenerSocio() {
+        return socio;
+    }
+
     @Override
     public double obtenerTotal() {
         double total = 0;
