@@ -17,7 +17,7 @@ public class Videoclub {
         Pelicula pe1 = new Pelicula("Resistencia");
         pe1.asignarPrecioVenta(10);
         pe1.asignarPrecioAlquiler(5);
-        pe1.asignarStockDisponible(1);
+        pe1.asignarStockDisponible(2);
         peliculas.add(pe1);
 
         Pelicula pe2 = new Pelicula("Last of Us");
@@ -58,10 +58,15 @@ public class Videoclub {
         for (Socio socio : socios) {
             Pelicula pelicula = obtenerPrimeraPeliculaDisponible();
             if (pelicula != null) {
+                Alquiler reciboAlquiler = new Alquiler(socio, Collections.singletonList(new Prestamo(pelicula)));
+                socio.añadirRecibo(reciboAlquiler);
+                pelicula.decrementarStockDisponible(1);
+                pelicula.incrementarStockNoDisponible(1);
                 Venta reciboVenta = new Venta(socio, Collections.singletonList(new LineaDeVenta(pelicula, 1)));
                 socio.añadirRecibo(reciboVenta);
                 pelicula.decrementarStockDisponible(1);
                 pelicula.incrementarStockNoDisponible(1);
+
             }
         }
     }

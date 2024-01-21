@@ -5,21 +5,23 @@ public class Prestamo {
     private double precioRetención;
     private Pelicula pelicula;
 
-    public Prestamo(Pelicula titulo, double pa, double pr) {
+    public Prestamo(Pelicula titulo) {
         this.pelicula = titulo;
-        this.precioAlquiler = pa;
-        this.precioRetención = pr;
+        this.precioAlquiler = obtenerPrecioAlquiler();
+        this.precioRetención = obtenerPrecioRetención();
     }
+
 
     public Pelicula obtenerPelicula() {
         return pelicula;
     }
 
     public double obtenerPrecioAlquiler() {
-        return precioAlquiler;
+        return pelicula.obtenerPrecioAlquiler();
     }
 
     public double obtenerPrecioRetención() {
+        precioRetención = pelicula.obtenerPrecioVenta() - pelicula.obtenerPrecioAlquiler();
         return precioRetención;
     }
 

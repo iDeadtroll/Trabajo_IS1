@@ -245,7 +245,7 @@ public class Pantalla {
     }
 
     public boolean masPeliculas() {
-        System.out.println("Desea añadir más películas a la venta? S/N");
+        System.out.println("Desea añadir más películas a la operación ? S/N");
         String respuesta = scanner.nextLine().toUpperCase();
         if (respuesta.equals("S")) {
             return true;

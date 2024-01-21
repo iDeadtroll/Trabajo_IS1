@@ -41,9 +41,19 @@ public class Socio {
     }
 
     public Prestamo buscarPréstamo(Pelicula película) {
-
+        List<Alquiler> alquileres = obtenerRecibosAlquiler();
+        for(Alquiler alquiler : alquileres){
+            for(Prestamo prestamo : alquiler.obtenerPrestamos()){
+                if (prestamo.obtenerPelicula().equals(película)) {
+                    return prestamo;
+                }
+            }
+        }
         return null;
     }
+
+
+    
 
     public void añadirRecibo(Recibo recibo) {
         this.recibos.add(recibo);

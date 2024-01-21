@@ -31,7 +31,7 @@ public class Devolucion extends Recibo {
 
     @Override
     public String aTexto() {
-        String s = "Recibo de Devolución para el socio " + socio.toString() + "\n";
+        String s = "Devolución para el socio " + socio.obtenerDni() + "\n";
         for (Prestamo prestamo : prestamos) {
             s += "Película: " + prestamo.obtenerPelicula().obtenerTitulo() + ", Precio de alquiler: "
                     + prestamo.obtenerPrecioAlquiler() + ", Precio de retención: " + prestamo.obtenerPrecioRetención()

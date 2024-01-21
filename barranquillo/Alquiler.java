@@ -30,7 +30,7 @@ class Alquiler extends Recibo {
 
     @Override
     public String aTexto() {
-        String s = "Recibo de Alquiler para el socio " + socio.obtenerDni() + "\n";
+        String s = "Alquiler para el socio " + socio.obtenerDni() + "\n";
         for (Prestamo prestamo : prestamos) {
             s += "Película: " + prestamo.obtenerPelicula().obtenerTitulo() + ", Precio de alquiler: "
                     + prestamo.obtenerPrecioAlquiler() + ", Precio de retención: " + prestamo.obtenerPrecioRetención()

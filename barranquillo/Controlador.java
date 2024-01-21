@@ -59,15 +59,27 @@ public class Controlador {
         devolucionActual = new Devolucion(s, new ArrayList<>());
         boolean masPeliculas = true;
         while (masPeliculas) {
-            pantalla.imprimePeliculas(videoclub.obtenerPeliculas());
+            List<Alquiler> recibos = s.obtenerRecibosAlquiler();
+            for (Alquiler alquiler : recibos) {
+                pantalla.imprimeRecibo(alquiler);         
+            }
             String titulo = pantalla.pedirTitulo();
             finalizarPrestamo(titulo);
             masPeliculas = pantalla.masPeliculas();
         }
+        Recibo recibo = devolucionActual;
+        devolucionActual.obtenerSocio().añadirRecibo(recibo);
+        pantalla.imprimeRecibo(devolucionActual);
+        devolucionActual = null;
     }
 
     public void finalizarPrestamo(String titulo) {
-
+        Pelicula pe =videoclub.buscarPelicula(titulo);
+        Prestamo prestamo = devolucionActual.obtenerSocio().buscarPréstamo(pe);
+        devolucionActual.obtenerPrestamos().add(prestamo);
+        int unidades = 1;
+        pe.decrementarStockNoDisponible(unidades);
+        pe.incrementarStockDisponible(unidades);
     }
 
     public void iniciarAlquiler(String dni) {
@@ -88,10 +100,7 @@ public class Controlador {
 
     public void iniciarPrestamo(String titulo) {
         Pelicula pe = seleccionarPelicula(titulo);
-        double pa = pe.obtenerPrecioAlquiler();
-        double pv = pe.obtenerPrecioVenta();
-        double precioRetención = pv - pa;
-        Prestamo prestamo = new Prestamo(pe, pa, precioRetención);
+        Prestamo prestamo = new Prestamo(pe);
         alquilerActual.obtenerPrestamos().add(prestamo);
         int unidades = 1;
         pe.decrementarStockDisponible(unidades);
