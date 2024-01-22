@@ -79,6 +79,10 @@ public class Socio {
         telefono = n;
     }
 
+    public List<Recibo> obtenRecibos() {
+        return recibos;
+    }
+
     public List<Alquiler> obtenerRecibosAlquiler() {
         List<Alquiler> alquileres = new ArrayList<>();
         for (Recibo recibo : recibos) {

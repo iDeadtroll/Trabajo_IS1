@@ -106,8 +106,9 @@ public class Pantalla {
                         System.out.println("1. Dar de alta a socio");
                         System.out.println("2. Dar de baja a socio");
                         System.out.println("3. Consultar datos de socio");
-                        System.out.println("4. Listar socios");
-                        System.out.println("5. Salir al menú principal");
+                        System.out.println("4. Listar recibos de socio");
+                        System.out.println("5. Listar socios");
+                        System.out.println("6. Salir al menú principal");
 
                         try {
                             opcionSubMenu = Integer.parseInt(scanner.nextLine());
@@ -142,10 +143,16 @@ public class Pantalla {
                                 }
                                 break;
                             case 4:
+                                System.out.println("----Listar recibos socio----");
+                                imprimeSocios(controlador.listarSocios());
+                                Socio s3 = controlador.seleccionarSocio(pedirDni());
+                                imprimeRecibos(s3);
+                                break;
+                            case 5:
                                 System.out.println("----Listar socios----");
                                 imprimeSocios(controlador.listarSocios());
                                 break;
-                            case 5:
+                            case 6:
                                 System.out.println("Volviendo al menú principal...");
                                 break;
                             default:
@@ -200,6 +207,13 @@ public class Pantalla {
         for (Pelicula pe : lp) {
             resumePelicula(pe);
         }
+    }
+
+    public void imprimeRecibos(Socio s) {
+        List<Recibo> recibos = controlador.listarRecibos(s);
+        for(Recibo recibo : recibos){
+            System.out.println(recibo.aTexto());
+        }     
     }
 
     public void imprimeRecibo(Recibo r) {

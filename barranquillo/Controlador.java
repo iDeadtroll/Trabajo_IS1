@@ -147,7 +147,7 @@ public class Controlador {
     }
 
     public List<Recibo> listarRecibos(Socio s) {
-        return null;
+        return s.obtenRecibos();
     }
 
     public List<Socio> listarSocios() {
@@ -163,8 +163,11 @@ public class Controlador {
     }
 
     public List<Recibo> listarPrestamos(Socio s){
-        List<Recibo> prestamos = new ArrayList<>();
-        
-        return null;
+        List<Recibo> recibos = new ArrayList<>();
+        List<Alquiler> alquileres = s.obtenerRecibosAlquiler();
+        for(Alquiler alquiler : alquileres){
+            recibos.add(alquiler);
+        }
+        return recibos;
     } 
 }
