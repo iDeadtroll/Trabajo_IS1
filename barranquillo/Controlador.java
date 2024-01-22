@@ -28,15 +28,10 @@ public class Controlador {
 
     public void anadirLineaDeVenta(String titulo, int unidades) {
         Pelicula pelicula = videoclub.buscarPelicula(titulo);
-
-        if (pelicula != null) {
-            LineaDeVenta lineaDeVenta = new LineaDeVenta(pelicula, unidades);
-            ventaActual.obtenerLineasDeVenta().add(lineaDeVenta);
-            pelicula.decrementarStockDisponible(unidades);
-            pelicula.incrementarStockNoDisponible(unidades);
-        } else {
-            System.out.println("Pelicula no encontrada.");
-        }
+        LineaDeVenta lineaDeVenta = new LineaDeVenta(pelicula, unidades);
+        ventaActual.obtenerLineasDeVenta().add(lineaDeVenta);
+        pelicula.decrementarStockDisponible(unidades);
+        pelicula.incrementarStockNoDisponible(unidades);
     }
 
     public void anadirPelicula(String titulo) {
@@ -61,7 +56,7 @@ public class Controlador {
         while (masPeliculas) {
             List<Alquiler> recibos = s.obtenerRecibosAlquiler();
             for (Alquiler alquiler : recibos) {
-                pantalla.imprimeRecibo(alquiler);         
+                pantalla.imprimeRecibo(alquiler);
             }
             String titulo = pantalla.pedirTitulo();
             finalizarPrestamo(titulo);
@@ -70,11 +65,12 @@ public class Controlador {
         Recibo recibo = devolucionActual;
         devolucionActual.obtenerSocio().añadirRecibo(recibo);
         pantalla.imprimeRecibo(devolucionActual);
+
         devolucionActual = null;
     }
 
     public void finalizarPrestamo(String titulo) {
-        Pelicula pe =videoclub.buscarPelicula(titulo);
+        Pelicula pe = videoclub.buscarPelicula(titulo);
         Prestamo prestamo = devolucionActual.obtenerSocio().buscarPréstamo(pe);
         devolucionActual.obtenerPrestamos().add(prestamo);
         int unidades = 1;
@@ -162,12 +158,17 @@ public class Controlador {
         return videoclub.buscarSocio(dni);
     }
 
-    public List<Recibo> listarPrestamos(Socio s){
+    public List<Recibo> listarPrestamos(Socio s) {
         List<Recibo> recibos = new ArrayList<>();
         List<Alquiler> alquileres = s.obtenerRecibosAlquiler();
-        for(Alquiler alquiler : alquileres){
+        for (Alquiler alquiler : alquileres) {
             recibos.add(alquiler);
         }
         return recibos;
-    } 
+    }
+
+    public void añadirValoracion(Pelicula pe) {
+        int val = pantalla.pedirValoracion();
+        pe.asignarValoracion(val);
+    }
 }

@@ -31,15 +31,14 @@ public class Venta extends Recibo {
 
     @Override
     public String aTexto() {
-        String s = "Venta para el socio " + socio.obtenerDni() + "\n";
+        String s = "\t\nVenta para el socio " + socio.obtenerDni() + "\n";
         for (LineaDeVenta lineaDeVenta : lineasDeVenta) {
-            s += "Película: " + lineaDeVenta.obtenerPelicula().obtenerTitulo()
-                    + ", Unidades: " + lineaDeVenta.obtenerUnidades()
-                    + ", Precio de venta: " + lineaDeVenta.obtenerPelicula().obtenerPrecioVenta()
-                    + ", Total: " + lineaDeVenta.obtenerTotal()
-                    + "\n";
+            s += "\n\tPelícula: \t\t" + lineaDeVenta.obtenerPelicula().obtenerTitulo()
+                    + "\n\tUnidades: \t\t" + lineaDeVenta.obtenerUnidades()
+                    + "\n\tPrecio de venta: \t" + lineaDeVenta.obtenerPelicula().obtenerPrecioVenta()
+                    + "\n\tTotal: \t\t\t" + lineaDeVenta.obtenerTotal();
         }
-        s += "Total de la venta: " + obtenerTotal();
+        s += "\n\tTotal de la venta: \t" + obtenerTotal();
         return s;
     }
 }

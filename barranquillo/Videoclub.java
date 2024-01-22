@@ -20,13 +20,13 @@ public class Videoclub {
         pe1.asignarStockDisponible(2);
         peliculas.add(pe1);
 
-        Pelicula pe2 = new Pelicula("Last of Us");
+        Pelicula pe2 = new Pelicula("Last of Us_");
         pe2.asignarPrecioVenta(8);
         pe2.asignarPrecioAlquiler(4);
         pe2.asignarStockDisponible(2);
         peliculas.add(pe2);
 
-        Pelicula pe3 = new Pelicula("Cars");
+        Pelicula pe3 = new Pelicula("Cars_______");
         pe3.asignarPrecioVenta(6);
         pe3.asignarPrecioAlquiler(3);
         pe3.asignarStockDisponible(3);

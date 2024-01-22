@@ -37,13 +37,14 @@ public class Pantalla {
                 case 1:
                     opcionSubMenu = 0;
 
-                    while (opcionSubMenu != 5) {
+                    while (opcionSubMenu != 6) {
                         System.out.println("\t\tGestion Peliculas:");
                         System.out.println("1. Añadir pelicula");
-                        System.out.println("2. Actualizar datos de pelicula");
-                        System.out.println("3. Consultar datos de pelicula");
-                        System.out.println("4. Listar peliculas");
-                        System.out.println("5. Salir al menú principal");
+                        System.out.println("2. Añadir valoracion de pelicula");
+                        System.out.println("3. Actualizar datos de pelicula");
+                        System.out.println("4. Consultar datos de pelicula");
+                        System.out.println("5. Listar peliculas");
+                        System.out.println("6. Salir al menú principal");
 
                         try {
                             opcionSubMenu = Integer.parseInt(scanner.nextLine());
@@ -59,7 +60,14 @@ public class Pantalla {
                                 confirmacionDePelicula();
                                 break;
                             case 2:
-                                System.out.println("----Actualizar datos de película----");
+                                System.out.println("----Añadir valoracion de pelicula----");
+                                imprimePeliculas(controlador.listarPeliculas());
+                                Pelicula pe = controlador.seleccionarPelicula(pedirTitulo());
+                                controlador.añadirValoracion(pe);
+                                imprimePelicula(pe);
+                                break;
+                            case 3:
+                                System.out.println("\t\t\t----Actualizar datos de película----");
                                 imprimePeliculas(controlador.listarPeliculas());
                                 Pelicula pe1 = controlador.seleccionarPelicula(pedirTitulo());
 
@@ -74,8 +82,8 @@ public class Pantalla {
                                     System.out.println("No se encontró una película con el TÍTULO proporcionado.");
                                 }
                                 break;
-                            case 3:
-                                System.out.println("----Consultar datos de película----");
+                            case 4:
+                                System.out.println("\t\t\t----Consultar datos de película----");
                                 imprimePeliculas(controlador.listarPeliculas());
                                 Pelicula pe2 = controlador.seleccionarPelicula(pedirTitulo());
 
@@ -85,11 +93,11 @@ public class Pantalla {
                                     System.out.println("No se encontró una película con el TITULO proporcionado.");
                                 }
                                 break;
-                            case 4:
-                                System.out.println("----Listar peliculas----");
+                            case 5:
+                                System.out.println("\t\t\t\t----Listar peliculas----");
                                 imprimePeliculas(controlador.listarPeliculas());
                                 break;
-                            case 5:
+                            case 6:
                                 System.out.println("Volviendo al menú principal...");
                                 break;
                             default:
@@ -101,7 +109,7 @@ public class Pantalla {
                 case 2:
                     opcionSubMenu = 0;
 
-                    while (opcionSubMenu != 5) {
+                    while (opcionSubMenu != 6) {
                         System.out.println("\t\tGestión socios:");
                         System.out.println("1. Dar de alta a socio");
                         System.out.println("2. Dar de baja a socio");
@@ -132,7 +140,7 @@ public class Pantalla {
                                 confirmacionDeBaja();
                                 break;
                             case 3:
-                                System.out.println("----Consultar datos de socio----");
+                                System.out.println("\t\t----Consultar datos de socio----");
                                 imprimeSocios(controlador.listarSocios());
                                 Socio s2 = controlador.seleccionarSocio(pedirDni());
 
@@ -149,7 +157,7 @@ public class Pantalla {
                                 imprimeRecibos(s3);
                                 break;
                             case 5:
-                                System.out.println("----Listar socios----");
+                                System.out.println("\t\t    ----Listar socios----");
                                 imprimeSocios(controlador.listarSocios());
                                 break;
                             case 6:
@@ -196,13 +204,13 @@ public class Pantalla {
     }
 
     public void imprimePelicula(Pelicula pe) {
-        System.out.println("Datos de la película:");
+        System.out.println("\n\n--------Datos de la película--------");
         System.out.println(pe.toString());
     }
 
     public void imprimePeliculas(List<Pelicula> lp) {
-        System.out.println("| Titulo | Stock Disponible | Stock No Disponible | Stock Total |");
-        System.out.println("|--------|------------------|---------------------|-------------|");
+        System.out.println("|   Titulo   | Stock Disponible | Stock No Disponible | Stock Total | Num Valoraciones|");
+        System.out.println("|------------|------------------|---------------------|-------------|-----------------|");
 
         for (Pelicula pe : lp) {
             resumePelicula(pe);
@@ -211,9 +219,9 @@ public class Pantalla {
 
     public void imprimeRecibos(Socio s) {
         List<Recibo> recibos = controlador.listarRecibos(s);
-        for(Recibo recibo : recibos){
+        for (Recibo recibo : recibos) {
             System.out.println(recibo.aTexto());
-        }     
+        }
     }
 
     public void imprimeRecibo(Recibo r) {
@@ -221,13 +229,13 @@ public class Pantalla {
     }
 
     public void imprimeSocio(Socio s) {
-        System.out.println("Datos del socio:");
+        System.out.println("-------Datos del socio-------");
         System.out.println(s.toString());
     }
 
     public void imprimeSocios(List<Socio> ls) {
-        System.out.println("| DNI | Estado | Número de préstamos en curso |");
-        System.out.println("|-----|--------|-------------------------------|");
+        System.out.println("|\tDNI\t|   Estado  | Número de préstamos en curso |");
+        System.out.println("|---------------|-----------|------------------------------|");
 
         for (Socio s : ls) {
             resumeSocio(s);
@@ -235,14 +243,15 @@ public class Pantalla {
     }
 
     public void resumePelicula(Pelicula pe) {
-        System.out.println("| " + pe.obtenerTitulo() + " | " + pe.obtenerStockDisponible() + " | "
-                + pe.obtenerStockNoDisponible() + " | " + pe.obtenerStockTotal() + "|");
+        int numValoraciones = pe.obtenerValoraciones().size();
+        System.out.println("|" + pe.obtenerTitulo() + " |         " + pe.obtenerStockDisponible() + "        |          "
+                + pe.obtenerStockNoDisponible() + "          |      " + pe.obtenerStockTotal() + "      |        " + numValoraciones + "        |");
     }
 
     public void resumeSocio(Socio s) {
         String estado = s.obtenerEstado() ? "activo" : "inactivo";
         int numPrestamos = s.obtenerRecibosAlquiler().size();
-        System.out.println("| " + s.obtenerDni() + " | " + estado + " | " + numPrestamos + " |");
+        System.out.println("|      " + s.obtenerDni() + "     |   " + estado + "  |               " + numPrestamos + "              |");
     }
 
     public String pedirTitulo() {
@@ -310,5 +319,11 @@ public class Pantalla {
         System.out.println("Introduzca el teléfono del socio:");
         String telefono = scanner.nextLine();
         return telefono;
+    }
+
+    public int pedirValoracion() {
+        System.out.println("Introduzca una valoracion (0-10):");
+        int val = scanner.nextInt();
+        return val;
     }
 }

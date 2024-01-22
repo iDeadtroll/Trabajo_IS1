@@ -52,9 +52,6 @@ public class Socio {
         return null;
     }
 
-
-    
-
     public void añadirRecibo(Recibo recibo) {
         this.recibos.add(recibo);
     }
@@ -106,9 +103,9 @@ public class Socio {
 
     public String toString() {
         String estadoSocio = obtenerEstado() ? "activo" : "inactivo";
-        String s = "DNI: " + dni + ", Nombre: " + nombre + ", Apellidos: " + apellidos + ", Teléfono: " + telefono
-                + ", Estado: " + estadoSocio;
-        s += "\nRecibos:\n";
+        String s = "DNI: \t\t" + dni + "\nNombre: \t" + nombre + "\nApellidos: \t" + apellidos + "\nTeléfono: \t" + telefono
+                + "\nEstado: \t" + estadoSocio;
+        s += "\n\t\t----Recibos----\n";
         for (Recibo recibo : recibos) {
             s += recibo.aTexto() + "\n";
         }

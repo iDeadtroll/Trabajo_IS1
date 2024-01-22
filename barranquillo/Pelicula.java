@@ -1,11 +1,15 @@
 package barranquillo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pelicula {
     private String titulo;
     private double precioVenta;
     private double precioAlquiler;
     private int stockDisponible;
     private int stockNoDisponible;
+    private List<Integer> valoracion;
 
     public Pelicula(String t) {
         this.titulo = t;
@@ -13,6 +17,7 @@ public class Pelicula {
         this.precioAlquiler = 0;
         this.stockDisponible = 0;
         this.stockNoDisponible = 0;
+        this.valoracion = new ArrayList<>();
     }
 
     public String obtenerTitulo() {
@@ -67,13 +72,35 @@ public class Pelicula {
         stockDisponible = sd;
     }
 
+    public void asignarValoracion(int val){
+        valoracion.add(val);
+    }
+
+    public List<Integer> obtenerValoraciones(){
+        return valoracion;
+    }
+
+    public double obtenerValoracion(){
+        int contador = 0;
+        int suma = 0;
+        for(int i=0; i< valoracion.size(); i++){
+            contador++;
+            suma = suma + valoracion.get(i);
+        }
+        if(contador == 0) {
+            return 0;
+        } else {
+            return (double)suma/contador;
+        }
+    }
     @Override
     public String toString() {
-        return "Titulo: " + obtenerTitulo() + "\n" +
-                "Precio de Venta: " + obtenerPrecioVenta() + "\n" +
-                "Precio de Alquiler: " + obtenerPrecioAlquiler() + "\n" +
-                "Stock Disponible: " + obtenerStockDisponible() + "\n" +
-                "Stock No Disponible: " + obtenerStockNoDisponible() + "\n" +
-                "Stock Total: " + obtenerStockTotal();
+        return "Titulo: \t\t" + obtenerTitulo() + "\n" +
+                "Precio de Venta: \t" + obtenerPrecioVenta() + "\n" +
+                "Precio de Alquiler: \t" + obtenerPrecioAlquiler() + "\n" +
+                "Stock Disponible: \t" + obtenerStockDisponible() + "\n" +
+                "Stock No Disponible: \t" + obtenerStockNoDisponible() + "\n" +
+                "Stock Total: \t\t" + obtenerStockTotal() + "\n" +
+                "Valoracion: \t\t" + obtenerValoracion() + "\n\n";
     }
 }

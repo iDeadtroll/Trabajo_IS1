@@ -31,13 +31,13 @@ public class Devolucion extends Recibo {
 
     @Override
     public String aTexto() {
-        String s = "Devolución para el socio " + socio.obtenerDni() + "\n";
+        String s = "\t\nDevolución para el socio " + socio.obtenerDni() + "\n";
         for (Prestamo prestamo : prestamos) {
-            s += "Película: " + prestamo.obtenerPelicula().obtenerTitulo() + ", Precio de alquiler: "
-                    + prestamo.obtenerPrecioAlquiler() + ", Precio de retención: " + prestamo.obtenerPrecioRetención()
-                    + "\n";
+            s += "\tPelícula: \t" + prestamo.obtenerPelicula().obtenerTitulo() + 
+                "\t\nPrecio de alquiler: \t"+ prestamo.obtenerPrecioAlquiler() + 
+                "\t\nPrecio de retención: \t" + prestamo.obtenerPrecioRetención();
         }
-        s += "Total: " + obtenerTotal();
+        s += "\t\nTotal: \t" + obtenerTotal();
         return s;
     }
 }
