@@ -11,13 +11,12 @@ public class Prestamo {
         this.precioRetención = obtenerPrecioRetención();
     }
 
-
     public Pelicula obtenerPelicula() {
         return pelicula;
     }
 
     public double obtenerPrecioAlquiler() {
-        return pelicula.obtenerPrecioAlquiler();
+        return precioAlquiler;
     }
 
     public double obtenerPrecioRetención() {
