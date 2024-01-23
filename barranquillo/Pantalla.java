@@ -173,7 +173,6 @@ public class Pantalla {
                     System.out.println("3. Realizar venta");
                     imprimeSocios(controlador.listarSocios());
                     controlador.iniciarVenta(pedirDni());
-                    controlador.finalizarVenta();
                     break;
 
                 case 4:
@@ -217,15 +216,15 @@ public class Pantalla {
         }
     }
 
+    public void imprimeRecibo(Recibo r) {
+        System.out.println(r.aTexto());
+    }
+
     public void imprimeRecibos(Socio s) {
         List<Recibo> recibos = controlador.listarRecibos(s);
         for (Recibo recibo : recibos) {
             System.out.println(recibo.aTexto());
         }
-    }
-
-    public void imprimeRecibo(Recibo r) {
-        System.out.println(r.aTexto());
     }
 
     public void imprimeSocio(Socio s) {
@@ -254,6 +253,18 @@ public class Pantalla {
         System.out.println("|      " + s.obtenerDni() + "     |   " + estado + "  |               " + numPrestamos + "              |");
     }
 
+    public boolean masPeliculas() {
+        System.out.println("Desea añadir más películas a la operación ? S/N");
+        String respuesta = scanner.nextLine().toUpperCase();
+        if (respuesta.equals("S")) {
+            return true;
+        }
+        if (respuesta.equals("N")) {
+            return false;
+        }
+        return false;
+    }
+
     public String pedirTitulo() {
         System.out.println("Introduzca un titulo:");
         String titulo = scanner.nextLine();
@@ -267,17 +278,6 @@ public class Pantalla {
         return cantidad;
     }
 
-    public boolean masPeliculas() {
-        System.out.println("Desea añadir más películas a la operación ? S/N");
-        String respuesta = scanner.nextLine().toUpperCase();
-        if (respuesta.equals("S")) {
-            return true;
-        }
-        if (respuesta.equals("N")) {
-            return false;
-        }
-        return false;
-    }
 
     public double pedirPrecioVenta() {
         System.out.println("Introduzca precio de venta:");

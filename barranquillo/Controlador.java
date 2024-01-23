@@ -12,7 +12,6 @@ public class Controlador {
 
     public Controlador(Videoclub videoclub) {
         this.videoclub = videoclub;
-        this.pantalla = new Pantalla(this);
     }
 
     public void altaSocio(String dni) {
@@ -49,28 +48,8 @@ public class Controlador {
         s.asignarBaja();
     }
 
-    public void iniciarDevolucion(String dni) {
-        Socio s = seleccionarSocio(dni);
-        devolucionActual = new Devolucion(s, new ArrayList<>());
-        boolean masPeliculas = true;
-        while (masPeliculas) {
-            List<Alquiler> recibos = s.obtenerRecibosAlquiler();
-            for (Alquiler alquiler : recibos) {
-                pantalla.imprimeRecibo(alquiler);
-            }
-            String titulo = pantalla.pedirTitulo();
-            finalizarPrestamo(titulo);
-            masPeliculas = pantalla.masPeliculas();
-        }
-        Recibo recibo = devolucionActual;
-        devolucionActual.obtenerSocio().añadirRecibo(recibo);
-        pantalla.imprimeRecibo(devolucionActual);
-
-        devolucionActual = null;
-    }
-
     public void finalizarPrestamo(String titulo) {
-        Pelicula pe = videoclub.buscarPelicula(titulo);
+        Pelicula pe = seleccionarPelicula(titulo);
         Prestamo prestamo = devolucionActual.obtenerSocio().buscarPréstamo(pe);
         devolucionActual.obtenerPrestamos().add(prestamo);
         int unidades = 1;
@@ -104,6 +83,26 @@ public class Controlador {
 
     }
 
+    public void iniciarDevolucion(String dni) {
+        Socio s = seleccionarSocio(dni);
+        devolucionActual = new Devolucion(s, new ArrayList<>());
+        boolean masPeliculas = true;
+        while (masPeliculas) {
+            List<Alquiler> recibos = s.obtenerRecibosAlquiler();
+            for (Alquiler alquiler : recibos) {
+                pantalla.imprimeRecibo(alquiler);
+            }
+            String titulo = pantalla.pedirTitulo();
+            finalizarPrestamo(titulo);
+            masPeliculas = pantalla.masPeliculas();
+        }
+        Recibo recibo = devolucionActual;
+        devolucionActual.obtenerSocio().añadirRecibo(recibo);
+        pantalla.imprimeRecibo(devolucionActual);
+
+        devolucionActual = null;
+    }
+
     public void iniciarVenta(String dni) {
         Socio s = seleccionarSocio(dni);
         ventaActual = new Venta(s, new ArrayList<>());
@@ -117,12 +116,10 @@ public class Controlador {
         }
         Recibo recibo = ventaActual;
         ventaActual.obtenerSocio().añadirRecibo(recibo);
-    }
-
-    public void finalizarVenta() {
         pantalla.imprimeRecibo(ventaActual);
         ventaActual = null;
     }
+
 
     public void introducirDatosPelicula(Pelicula pe, double pv, double pa, int stockDisponible) {
         pe.asignarPrecioVenta(pv);
@@ -143,7 +140,7 @@ public class Controlador {
     }
 
     public List<Recibo> listarRecibos(Socio s) {
-        return s.obtenRecibos();
+        return s.obtenerRecibos();
     }
 
     public List<Socio> listarSocios() {

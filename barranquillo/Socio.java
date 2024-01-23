@@ -40,11 +40,11 @@ public class Socio {
         return telefono;
     }
 
-    public Prestamo buscarPréstamo(Pelicula película) {
+    public Prestamo buscarPréstamo(Pelicula pe) {
         List<Alquiler> alquileres = obtenerRecibosAlquiler();
         for(Alquiler alquiler : alquileres){
             for(Prestamo prestamo : alquiler.obtenerPrestamos()){
-                if (prestamo.obtenerPelicula().equals(película)) {
+                if (prestamo.obtenerPelicula().equals(pe)) {
                     return prestamo;
                 }
             }
@@ -76,7 +76,7 @@ public class Socio {
         telefono = n;
     }
 
-    public List<Recibo> obtenRecibos() {
+    public List<Recibo> obtenerRecibos() {
         return recibos;
     }
 
@@ -90,22 +90,14 @@ public class Socio {
         return alquileres;
     }
 
-    public List<Devolucion> obtenerRecibosDevolucion() {
-        List<Devolucion> devoluciones = new ArrayList<>();
-        for (Recibo recibo : recibos) {
-            if (recibo instanceof Devolucion) {
-                devoluciones.add((Devolucion) recibo);
-            }
-        }
-        return devoluciones;
-    }
-
-
     public String toString() {
         String estadoSocio = obtenerEstado() ? "activo" : "inactivo";
-        String s = "DNI: \t\t" + dni + "\nNombre: \t" + nombre + "\nApellidos: \t" + apellidos + "\nTeléfono: \t" + telefono
-                + "\nEstado: \t" + estadoSocio;
-        s += "\n\t\t----Recibos----\n";
+        String s =  "DNI: \t\t" + dni + 
+                    "\nNombre: \t" + nombre + 
+                    "\nApellidos: \t" + apellidos + 
+                    "\nTeléfono: \t" + telefono+   
+                    "\nEstado: \t" + estadoSocio;
+                s +="\n\t\t----Recibos----\n";
         for (Recibo recibo : recibos) {
             s += recibo.aTexto() + "\n";
         }
