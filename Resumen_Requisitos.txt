@@ -20,7 +20,7 @@ Alquiler:
 
     Solo los socios pueden alquilar películas.
     Cada socio puede alquilar varias películas distintas.
-    En el alquiler se paga una retención que equivale al precio de compra de la película.
+    En el alquiler se paga una retención que equivale al precio de compra de la película menos el precio de alquiler.
     El ticket de alquiler incluirá el socio, las películas alquiladas, el precio de alquiler de cada película, el precio de la retención, total, pago y cambio.
 Devolución:
 
