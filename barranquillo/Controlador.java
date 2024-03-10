@@ -7,13 +7,15 @@ public class Controlador {
     private Videoclub videoclub;
     private Pantalla pantalla;
     private Venta ventaActual;
-    private Alquiler alquilerActual;
+    // private Alquiler alquilerActual;
     private Devolucion devolucionActual;
+    private OrderContexStrategy order;
 
     public Controlador(Videoclub videoclub) {
         this.videoclub = videoclub;
         // this.pantalla = new Pantalla(this);
         this.pantalla = Pantalla.getInstance();
+        this.order = new OrderContexStrategy();
     }
 
     public void altaSocio(String dni) {
@@ -27,13 +29,13 @@ public class Controlador {
         ls.add(s);
     }
 
-    public void anadirLineaDeVenta(String titulo, int unidades) {
-        Pelicula pelicula = videoclub.buscarPelicula(titulo);
-        LineaDeVenta lineaDeVenta = new LineaDeVenta(pelicula, unidades);
-        ventaActual.obtenerLineasDeVenta().add(lineaDeVenta);
-        pelicula.decrementarStockDisponible(unidades);
-        pelicula.incrementarStockNoDisponible(unidades);
-    }
+    // public void anadirLineaDeVenta(String titulo, int unidades) {
+    // Pelicula pelicula = videoclub.buscarPelicula(titulo);
+    // LineaDeVenta lineaDeVenta = new LineaDeVenta(pelicula, unidades);
+    // ventaActual.obtenerLineasDeVenta().add(lineaDeVenta);
+    // pelicula.decrementarStockDisponible(unidades);
+    // pelicula.incrementarStockNoDisponible(unidades);
+    // }
 
     public void anadirPelicula(String titulo) {
         Pelicula pe = new Pelicula(titulo);
@@ -60,30 +62,34 @@ public class Controlador {
     }
 
     public void iniciarAlquiler(String dni) {
-        Socio s = seleccionarSocio(dni);
-        alquilerActual = new Alquiler(s, new ArrayList<>());
-        boolean masPeliculas = true;
-        while (masPeliculas) {
-            pantalla.imprimePeliculas(videoclub.obtenerPeliculas());
-            String titulo = pantalla.pedirTitulo();
-            iniciarPrestamo(titulo);
-            masPeliculas = pantalla.masPeliculas();
-        }
-        Recibo recibo = alquilerActual;
-        alquilerActual.obtenerSocio().añadirRecibo(recibo);
-        pantalla.imprimeRecibo(alquilerActual);
-        ventaActual = null;
+        OrderAlquilerStrategy al = new OrderAlquilerStrategy(videoclub);
+        order.setStrategy(al);
+
+        order.orderRunner(dni);
+
+        // Socio s = seleccionarSocio(dni);
+        // Alquiler alquilerActual = new Alquiler(s, new ArrayList<>());
+        // boolean masPeliculas = true;
+        // while (masPeliculas) {
+        // pantalla.imprimePeliculas(videoclub.obtenerPeliculas());
+        // String titulo = pantalla.pedirTitulo();
+        // iniciarPrestamo(titulo, alquilerActual);
+        // masPeliculas = pantalla.masPeliculas();
+        // }
+        // Recibo recibo = alquilerActual;
+        // alquilerActual.obtenerSocio().añadirRecibo(recibo);
+        // pantalla.imprimeRecibo(alquilerActual);
     }
 
-    public void iniciarPrestamo(String titulo) {
-        Pelicula pe = seleccionarPelicula(titulo);
-        Prestamo prestamo = new Prestamo(pe);
-        alquilerActual.obtenerPrestamos().add(prestamo);
-        int unidades = 1;
-        pe.decrementarStockDisponible(unidades);
-        pe.incrementarStockNoDisponible(unidades);
+    // public void iniciarPrestamo(String titulo, Alquiler alquilerActual) {
+    // Pelicula pe = seleccionarPelicula(titulo);
+    // Prestamo prestamo = new Prestamo(pe);
+    // alquilerActual.obtenerPrestamos().add(prestamo);
+    // int unidades = 1;
+    // pe.decrementarStockDisponible(unidades);
+    // pe.incrementarStockNoDisponible(unidades);
 
-    }
+    // }
 
     public void iniciarDevolucion(String dni) {
         Socio s = seleccionarSocio(dni);
@@ -106,22 +112,26 @@ public class Controlador {
     }
 
     public void iniciarVenta(String dni) {
-        Socio s = seleccionarSocio(dni);
-        ventaActual = new Venta(s, new ArrayList<>());
-        boolean masPeliculas = true;
-        while (masPeliculas) {
-            pantalla.imprimePeliculas(videoclub.obtenerPeliculas());
-            String titulo = pantalla.pedirTitulo();
-            int cantidad = pantalla.pedirCantidad();
-            anadirLineaDeVenta(titulo, cantidad);
-            masPeliculas = pantalla.masPeliculas();
-        }
-        Recibo recibo = ventaActual;
-        ventaActual.obtenerSocio().añadirRecibo(recibo);
-        pantalla.imprimeRecibo(ventaActual);
-        ventaActual = null;
-    }
 
+        OrderVentaStrategy v = new OrderVentaStrategy(videoclub);
+        order.setStrategy(v);
+
+        order.orderRunner(dni);
+        // Socio s = seleccionarSocio(dni);
+        // ventaActual = new Venta(s, new ArrayList<>());
+        // boolean masPeliculas = true;
+        // while (masPeliculas) {
+        // pantalla.imprimePeliculas(videoclub.obtenerPeliculas());
+        // String titulo = pantalla.pedirTitulo();
+        // int cantidad = pantalla.pedirCantidad();
+        // anadirLineaDeVenta(titulo, cantidad);
+        // masPeliculas = pantalla.masPeliculas();
+        // }
+        // Recibo recibo = ventaActual;
+        // ventaActual.obtenerSocio().añadirRecibo(recibo);
+        // pantalla.imprimeRecibo(ventaActual);
+        // ventaActual = null;
+    }
 
     public void introducirDatosPelicula(Pelicula pe, double pv, double pa, int stockDisponible) {
         pe.asignarPrecioVenta(pv);
