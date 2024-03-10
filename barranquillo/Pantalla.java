@@ -4,12 +4,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Pantalla {
+    private static Pantalla instance;
     private Controlador controlador;
     private Scanner scanner;
 
-    public Pantalla(Controlador ctrl) {
+    private Pantalla() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    public static Pantalla getInstance() {
+        if (instance == null) {
+            instance = new Pantalla();
+        }
+        return instance;
+    }
+
+    /*public Pantalla(Controlador ctrl) {
         this.controlador = ctrl;
         this.scanner = new Scanner(System.in);
+    }*/
+
+    public void setController(Controlador ctrl) {
+        this.controlador = ctrl;
     }
 
     public void mostrarInterfaz() {

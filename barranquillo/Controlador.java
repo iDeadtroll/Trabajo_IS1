@@ -12,7 +12,8 @@ public class Controlador {
 
     public Controlador(Videoclub videoclub) {
         this.videoclub = videoclub;
-        this.pantalla = new Pantalla(this);
+        // this.pantalla = new Pantalla(this);
+        this.pantalla = Pantalla.getInstance();
     }
 
     public void altaSocio(String dni) {
