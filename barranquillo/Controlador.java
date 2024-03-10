@@ -12,6 +12,7 @@ public class Controlador {
 
     public Controlador(Videoclub videoclub) {
         this.videoclub = videoclub;
+        this.pantalla = new Pantalla(this);
     }
 
     public void altaSocio(String dni) {
@@ -167,5 +168,9 @@ public class Controlador {
     public void añadirValoracion(Pelicula pe) {
         int val = pantalla.pedirValoracion();
         pe.asignarValoracion(val);
+    }
+
+    public Pantalla getPantalla() {
+        return this.pantalla;
     }
 }
