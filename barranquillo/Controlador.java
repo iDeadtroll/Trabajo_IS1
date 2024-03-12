@@ -6,9 +6,6 @@ import java.util.List;
 public class Controlador {
     private Videoclub videoclub;
     private Pantalla pantalla;
-    private Venta ventaActual;
-    // private Alquiler alquilerActual;
-    private Devolucion devolucionActual;
     private OrderContexStrategy order;
 
     public Controlador(Videoclub videoclub) {
@@ -17,6 +14,14 @@ public class Controlador {
         this.pantalla = Pantalla.getInstance();
         this.order = new OrderContexStrategy();
     }
+
+    // public void anadirLineaDeVenta(String titulo, int unidades) {
+    // Pelicula pelicula = videoclub.buscarPelicula(titulo);
+    // LineaDeVenta lineaDeVenta = new LineaDeVenta(pelicula, unidades);
+    // ventaActual.obtenerLineasDeVenta().add(lineaDeVenta);
+    // pelicula.decrementarStockDisponible(unidades);
+    // pelicula.incrementarStockNoDisponible(unidades);
+    // }
 
     public void altaSocio(String dni) {
         Socio s = new Socio(dni);
@@ -29,13 +34,12 @@ public class Controlador {
         ls.add(s);
     }
 
-    // public void anadirLineaDeVenta(String titulo, int unidades) {
-    // Pelicula pelicula = videoclub.buscarPelicula(titulo);
-    // LineaDeVenta lineaDeVenta = new LineaDeVenta(pelicula, unidades);
-    // ventaActual.obtenerLineasDeVenta().add(lineaDeVenta);
-    // pelicula.decrementarStockDisponible(unidades);
-    // pelicula.incrementarStockNoDisponible(unidades);
-    // }
+    private void introducirDatosSocio(Socio s, String nombre, String apellidos, String telefono) {
+        s.asignarNombre(nombre);
+        s.asignarApellidos(apellidos);
+        s.asignarTelefono(telefono);
+        pantalla.imprimeSocio(s);
+    }
 
     public void anadirPelicula(String titulo) {
         Pelicula pe = new Pelicula(titulo);
@@ -47,18 +51,16 @@ public class Controlador {
         lp.add(pe);
     }
 
+    private void introducirDatosPelicula(Pelicula pe, double pv, double pa, int stockDisponible) {
+        pe.asignarPrecioVenta(pv);
+        pe.asignarPrecioAlquiler(pa);
+        pe.asignarStockDisponible(stockDisponible);
+        pantalla.imprimePelicula(pe);
+    }
+
     public void bajaSocio(String dni) {
         Socio s = seleccionarSocio(dni);
         s.asignarBaja();
-    }
-
-    public void finalizarPrestamo(String titulo) {
-        Pelicula pe = seleccionarPelicula(titulo);
-        Prestamo prestamo = devolucionActual.obtenerSocio().buscarPréstamo(pe);
-        devolucionActual.obtenerPrestamos().add(prestamo);
-        int unidades = 1;
-        pe.decrementarStockNoDisponible(unidades);
-        pe.incrementarStockDisponible(unidades);
     }
 
     public void iniciarAlquiler(String dni) {
@@ -93,7 +95,7 @@ public class Controlador {
 
     public void iniciarDevolucion(String dni) {
         Socio s = seleccionarSocio(dni);
-        devolucionActual = new Devolucion(s, new ArrayList<>());
+        Recibo<Devolucion> devolucionActual = new Devolucion(s, new ArrayList<>());
         boolean masPeliculas = true;
         while (masPeliculas) {
             List<Alquiler> recibos = s.obtenerRecibosAlquiler();
@@ -109,6 +111,15 @@ public class Controlador {
         pantalla.imprimeRecibo(devolucionActual);
 
         devolucionActual = null;
+    }
+
+    public void finalizarPrestamo(String titulo) {
+        Pelicula pe = seleccionarPelicula(titulo);
+        Prestamo prestamo = devolucionActual.obtenerSocio().buscarPréstamo(pe);
+        devolucionActual.obtenerPrestamos().add(prestamo);
+        int unidades = 1;
+        pe.decrementarStockNoDisponible(unidades);
+        pe.incrementarStockDisponible(unidades);
     }
 
     public void iniciarVenta(String dni) {
@@ -131,20 +142,6 @@ public class Controlador {
         // ventaActual.obtenerSocio().añadirRecibo(recibo);
         // pantalla.imprimeRecibo(ventaActual);
         // ventaActual = null;
-    }
-
-    public void introducirDatosPelicula(Pelicula pe, double pv, double pa, int stockDisponible) {
-        pe.asignarPrecioVenta(pv);
-        pe.asignarPrecioAlquiler(pa);
-        pe.asignarStockDisponible(stockDisponible);
-        pantalla.imprimePelicula(pe);
-    }
-
-    public void introducirDatosSocio(Socio s, String nombre, String apellidos, String telefono) {
-        s.asignarNombre(nombre);
-        s.asignarApellidos(apellidos);
-        s.asignarTelefono(telefono);
-        pantalla.imprimeSocio(s);
     }
 
     public List<Pelicula> listarPeliculas() {

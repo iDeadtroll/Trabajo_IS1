@@ -19,10 +19,12 @@ public class Pantalla {
         return instance;
     }
 
-    /*public Pantalla(Controlador ctrl) {
-        this.controlador = ctrl;
-        this.scanner = new Scanner(System.in);
-    }*/
+    /*
+     * public Pantalla(Controlador ctrl) {
+     * this.controlador = ctrl;
+     * this.scanner = new Scanner(System.in);
+     * }
+     */
 
     public void setController(Controlador ctrl) {
         this.controlador = ctrl;
@@ -259,14 +261,17 @@ public class Pantalla {
 
     public void resumePelicula(Pelicula pe) {
         int numValoraciones = pe.obtenerValoraciones().size();
-        System.out.println("|" + pe.obtenerTitulo() + " |         " + pe.obtenerStockDisponible() + "        |          "
-                + pe.obtenerStockNoDisponible() + "          |      " + pe.obtenerStockTotal() + "      |        " + numValoraciones + "        |");
+        System.out
+                .println("|" + pe.obtenerTitulo() + " |         " + pe.obtenerStockDisponible() + "        |          "
+                        + pe.obtenerStockNoDisponible() + "          |      " + pe.obtenerStockTotal()
+                        + "      |        " + numValoraciones + "        |");
     }
 
     public void resumeSocio(Socio s) {
         String estado = s.obtenerEstado() ? "activo" : "inactivo";
         int numPrestamos = s.obtenerRecibosAlquiler().size();
-        System.out.println("|      " + s.obtenerDni() + "     |   " + estado + "  |               " + numPrestamos + "              |");
+        System.out.println("|      " + s.obtenerDni() + "     |   " + estado + "  |               " + numPrestamos
+                + "              |");
     }
 
     public boolean masPeliculas() {
@@ -293,7 +298,6 @@ public class Pantalla {
         scanner.nextLine();
         return cantidad;
     }
-
 
     public double pedirPrecioVenta() {
         System.out.println("Introduzca precio de venta:");
